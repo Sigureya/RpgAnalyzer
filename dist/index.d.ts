@@ -1,1 +1,1 @@
-declare const x = "Hello, world!";
+export * from './extracText';

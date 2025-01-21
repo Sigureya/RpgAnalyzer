@@ -1,2 +1,1 @@
-import {} from "@sigureya/rpg-data-tools";
-const x = "Hello, world!";
+export * from "./extracText";
