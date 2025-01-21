@@ -1,0 +1,25 @@
+import { defineConfig } from "vite";
+import dts from "vite-plugin-dts";
+
+export default defineConfig({
+  build: {
+    lib: {
+      entry: "./src/index.ts", // ライブラリのエントリポイント
+      name: "RpgAnalyzer", // ライブラリの名前（UMD形式用）
+      fileName: (format) => `rpg-analyzer.${format}.js`, // 出力ファイル名
+      formats: ["es", "cjs", "umd"], // 出力形式
+    },
+    rollupOptions: {
+      external: [], // 必要に応じて外部モジュールを指定
+    },
+    sourcemap: true, // ソースマップの生成
+    outDir: "dist", // 出力先ディレクトリ
+    emptyOutDir: true, // 出力先をビルド前にクリア
+  },
+  plugins: [
+    dts({
+      include: ["src/**/*.ts"], // 型定義を生成する対象
+      exclude: ["src/**/*.test.ts"], // 型定義生成からテストコードを除外
+    }),
+  ],
+});
