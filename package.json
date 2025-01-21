@@ -1,8 +1,9 @@
 {
-  "name": "rpg-data-tools",
+  "name": "@sigureya/rpganalyzer",
   "version": "1.0.2",
   "description": "RpgMaker Analyzer Library",
   "main": "dist/rpgdatatools.cjs.js",
+  "types": "dist/index.d.ts",
   "module": "dist/rpgdatatools.esm.js",
   "exports": {
     ".": {
