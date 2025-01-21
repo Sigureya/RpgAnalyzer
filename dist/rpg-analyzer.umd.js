@@ -1,2 +1,2 @@
-(function(n){typeof define=="function"&&define.amd?define(n):n()})(function(){"use strict"});
+(function(e,n){typeof exports=="object"&&typeof module<"u"?n(exports):typeof define=="function"&&define.amd?define(["exports"],n):(e=typeof globalThis<"u"?globalThis:e||self,n(e.RpgAnalyzer={}))})(this,function(e){"use strict";const n=i=>({type:0,elementId:0,formula:"0",variance:20,critical:!1,...i}),t=(i=>({id:0,name:"",iconIndex:0,description:"",note:"",price:0,consumable:!1,scope:0,occasion:0,speed:0,successRate:100,repeats:1,tpGain:0,hitType:0,animationId:0,damage:n(),effects:[],...i}))({name:"やくそう",price:50});e.item=t,Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})});
 //# sourceMappingURL=rpg-analyzer.umd.js.map

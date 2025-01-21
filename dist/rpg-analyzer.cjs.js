@@ -1,2 +1,2 @@
-"use strict";
+"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const t=e=>({type:0,elementId:0,formula:"0",variance:20,critical:!1,...e}),a=e=>({id:0,name:"",iconIndex:0,description:"",note:"",price:0,consumable:!1,scope:0,occasion:0,speed:0,successRate:100,repeats:1,tpGain:0,hitType:0,animationId:0,damage:t(),effects:[],...e}),i=a({name:"やくそう",price:50});exports.item=i;
 //# sourceMappingURL=rpg-analyzer.cjs.js.map
