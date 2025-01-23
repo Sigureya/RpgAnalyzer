@@ -4,6 +4,10 @@ import type {
   Data_Enemy,
   Data_Item,
   Data_Skill,
+  Data_Weapon,
+  Data_Armor,
+  Data_State,
+  Data_Class,
 } from "@sigureya/rpgtypes";
 export interface TextWithReferences {
   key: string;
@@ -29,13 +33,27 @@ export const extractTextFromEnemy = (
   ];
 };
 
-export const extractTextFromItem = (item: Data_Item): TextWithReferences[] => {
+export const extractTextFromClass = (
+  class_: Data_Class
+): TextWithReferences[] => {
   return [
-    ...pickString(item, ["name", "description"], createTextReference),
-    ...extractNotes(item),
+    ...pickString(class_, ["name"], createTextReference),
+    ...extractNotes(class_),
   ];
 };
 
+export const extractTextFromState = (
+  state: Data_State
+): TextWithReferences[] => {
+  return [
+    ...pickString(
+      state,
+      ["name", "message1", "message2", "message3", "message4"],
+      createTextReference
+    ),
+    ...extractNotes(state),
+  ];
+};
 export const extractTextFromSkill = (
   skill: Data_Skill
 ): TextWithReferences[] => {
@@ -46,6 +64,31 @@ export const extractTextFromSkill = (
       createTextReference
     ),
     ...extractNotes(skill),
+  ];
+};
+
+export const extractTextFromItem = (item: Data_Item): TextWithReferences[] => {
+  return [
+    ...pickString(item, ["name", "description"], createTextReference),
+    ...extractNotes(item),
+  ];
+};
+
+export const extractTextFromWeapon = (
+  weapon: Data_Weapon
+): TextWithReferences[] => {
+  return [
+    ...pickString(weapon, ["name", "description"], createTextReference),
+    ...extractNotes(weapon),
+  ];
+};
+
+export const extractTextFromArmor = (
+  armor: Data_Armor
+): TextWithReferences[] => {
+  return [
+    ...pickString(armor, ["name", "description"], createTextReference),
+    ...extractNotes(armor),
   ];
 };
 
