@@ -8,6 +8,7 @@ import type {
   Data_Armor,
   Data_State,
   Data_Class,
+  PickByType,
 } from "@sigureya/rpgtypes";
 export interface TextWithReferences {
   key: string;
@@ -15,8 +16,16 @@ export interface TextWithReferences {
   id: number;
 }
 
-export const extractTextFromActor = (
-  actor: Data_Actor
+type TextDataSource<T extends { id: number }> = PickByType<T, string> & {
+  id: number;
+};
+
+type DataPicker<T extends { id: number }> = (
+  data: TextDataSource<T>
+) => TextWithReferences[];
+
+export const extractTextFromActor: DataPicker<Data_Actor> = (
+  actor
 ): TextWithReferences[] => {
   return [
     ...pickString(actor, ["name", "nickname", "profile"], createTextReference),
@@ -24,8 +33,8 @@ export const extractTextFromActor = (
   ];
 };
 
-export const extractTextFromEnemy = (
-  enemy: Data_Enemy
+export const extractTextFromEnemy: DataPicker<Data_Enemy> = (
+  enemy
 ): TextWithReferences[] => {
   return [
     ...pickString(enemy, ["name"], createTextReference),
@@ -33,8 +42,8 @@ export const extractTextFromEnemy = (
   ];
 };
 
-export const extractTextFromClass = (
-  class_: Data_Class
+export const extractTextFromClass: DataPicker<Data_Class> = (
+  class_
 ): TextWithReferences[] => {
   return [
     ...pickString(class_, ["name"], createTextReference),
@@ -42,8 +51,8 @@ export const extractTextFromClass = (
   ];
 };
 
-export const extractTextFromState = (
-  state: Data_State
+export const extractTextFromState: DataPicker<Data_State> = (
+  state
 ): TextWithReferences[] => {
   return [
     ...pickString(
@@ -54,8 +63,8 @@ export const extractTextFromState = (
     ...extractNotes(state),
   ];
 };
-export const extractTextFromSkill = (
-  skill: Data_Skill
+export const extractTextFromSkill: DataPicker<Data_Skill> = (
+  skill
 ): TextWithReferences[] => {
   return [
     ...pickString(
@@ -67,15 +76,17 @@ export const extractTextFromSkill = (
   ];
 };
 
-export const extractTextFromItem = (item: Data_Item): TextWithReferences[] => {
+export const extractTextFromItem: DataPicker<Data_Item> = (
+  item
+): TextWithReferences[] => {
   return [
     ...pickString(item, ["name", "description"], createTextReference),
     ...extractNotes(item),
   ];
 };
 
-export const extractTextFromWeapon = (
-  weapon: Data_Weapon
+export const extractTextFromWeapon: DataPicker<Data_Weapon> = (
+  weapon
 ): TextWithReferences[] => {
   return [
     ...pickString(weapon, ["name", "description"], createTextReference),
@@ -83,8 +94,8 @@ export const extractTextFromWeapon = (
   ];
 };
 
-export const extractTextFromArmor = (
-  armor: Data_Armor
+export const extractTextFromArmor: DataPicker<Data_Armor> = (
+  armor
 ): TextWithReferences[] => {
   return [
     ...pickString(armor, ["name", "description"], createTextReference),
