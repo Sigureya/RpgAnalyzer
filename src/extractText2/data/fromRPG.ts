@@ -19,7 +19,7 @@ export const extractTextFromActor = (
   actor: Data_Actor
 ): TextWithReferences[] => {
   return [
-    ...pickString(actor, ["name", "nickname"], createTextReference),
+    ...pickString(actor, ["name", "nickname", "profile"], createTextReference),
     ...extractNotes(actor),
   ];
 };
