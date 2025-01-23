@@ -24,8 +24,8 @@ const a = (e) => ({
   damage: a(),
   effects: [],
   ...e
-}), n = c({ name: "やくそう", price: 50 });
+}), i = c({ name: "やくそう", price: 50 });
 export {
-  n as item
+  i as item
 };
 //# sourceMappingURL=rpg-analyzer.es.js.map
