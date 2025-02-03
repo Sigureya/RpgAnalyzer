@@ -6,7 +6,7 @@ import type {
 } from "@sigureya/rpgtypes";
 import type { AudioCommandInfo } from "./resourcePath";
 import { audioPathFromCommands, isAudioCommand } from "./resourcePath";
-import type { AudioList } from "./types";
+import type { MapAudioList } from "./types";
 
 export const collectAudioCommands = (
   page: { list: EventCommand[] },
@@ -23,7 +23,7 @@ export const collectAudioCommands = (
 
 export const extractAudioFromMap = (
   map: Map_Audios & MapEventContainer<EventCommand>
-): AudioList => {
+): MapAudioList => {
   return {
     bgm: map.bgm,
     bgs: map.bgs,
