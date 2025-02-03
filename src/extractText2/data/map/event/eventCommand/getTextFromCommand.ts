@@ -15,6 +15,7 @@ type CommandParam = CommandParameter<string>;
 export const extractTextFromEventCommands = (
   list: ReadonlyArray<EventCommand>
 ): CommandParam[][] => {
+  // メッセージの表示など結合し、1つのコマンドにまとめる
   const normalized = normalizedCommands(list).flat();
   return mappingCommandList(normalized, extractTextMapper);
 };
@@ -54,9 +55,9 @@ const readScript = (script: EventCommandGroup_Script): CommandParam[] => {
 };
 
 export const commandChoice = (command: Command_ShowChoices): CommandParam[] => {
-  return command.parameters[0].map<CommandParam>((msg) => ({
+  return command.parameters[0].map<CommandParam>((msg, index) => ({
     code: command.code,
-    paramIndex: 0,
+    paramIndex: index,
     value: msg,
   }));
 };
