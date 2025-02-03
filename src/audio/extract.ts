@@ -1,5 +1,11 @@
-import { collectMapEvents } from "@sigureya/rpg-data-tools";
+import {
+  collectMapEvents,
+  processCommonEvents,
+  processTroopEvents,
+} from "@sigureya/rpg-data-tools";
 import type {
+  Data_CommonEvent,
+  Data_Troop,
   EventCommand,
   Map_Audios,
   MapEventContainer,
@@ -19,6 +25,18 @@ export const collectAudioCommands = (
     pageIndex,
     eventId: event.id,
   }));
+};
+
+export const extractAudioCFromCommonEvents = (
+  events: ReadonlyArray<Data_CommonEvent>
+): AudioCommandInfo[] => {
+  return processCommonEvents(events, collectAudioCommands).flat(2);
+};
+
+export const expectAudioFromTroop = (
+  troops: ReadonlyArray<Data_Troop>
+): AudioCommandInfo[] => {
+  return processTroopEvents(troops, collectAudioCommands).flat(2);
 };
 
 export const extractAudioFromMap = (
