@@ -1,3 +1,3 @@
 export * from "./types";
-export * from "./fromMap";
+export * from "./extract";
 export * from "./resourcePath";
