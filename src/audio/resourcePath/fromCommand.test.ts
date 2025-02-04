@@ -1,72 +1,18 @@
 import * as RPG from "@sigureya/rpgtypes";
-import type { AudioFileParams } from "@sigureya/rpgtypes";
 import { describe, expect, test } from "vitest";
 import { audioPathFromCommands, isAudioCommand } from "./fromCommand";
-const mockAudio = Object.freeze<AudioFileParams>({
-  name: "test",
-  volume: 100,
-  pitch: 100,
-  pan: 50,
-});
-
-const mockPlayBGM: RPG.Command_PlayBGM = {
-  code: RPG.PLAY_BGM,
-  parameters: [mockAudio],
-  indent: 0,
-};
-const mockPlayBGS: RPG.Command_PlayBGS = {
-  code: RPG.PLAY_BGS,
-  parameters: [mockAudio],
-  indent: 0,
-};
-
-const mockPlayME: RPG.Command_PlayME = {
-  code: RPG.PLAY_ME,
-  parameters: [mockAudio],
-  indent: 0,
-};
-
-const mockPlaySE: RPG.Command_PlaySE = {
-  code: RPG.PLAY_SE,
-  parameters: [mockAudio],
-  indent: 0,
-};
-
-const mockChangeBattleBGM: RPG.Command_ChangeBattleBGM = {
-  code: RPG.CHANGE_BATTLE_BGM,
-  parameters: [mockAudio],
-  indent: 0,
-};
-
-const mockChangeVictoryME: RPG.Command_ChangeVictoryME = {
-  code: RPG.CHANGE_VICTORY_ME,
-  parameters: [mockAudio],
-  indent: 0,
-};
-
-const mockChangeDefeatME: RPG.Command_ChangeDefeatME = {
-  code: RPG.CHANGE_DEFEAT_ME,
-  parameters: [mockAudio],
-  indent: 0,
-};
-
-const mockChangeVehicleME: RPG.Command_ChangeVehicleME = {
-  code: RPG.CHANGE_VEHICLE_ME,
-  parameters: [mockAudio],
-  indent: 0,
-};
-
-const mockCommonEvent: RPG.Command_CommonEvent = {
-  code: RPG.COMMON_EVENT,
-  parameters: [1],
-  indent: 0,
-};
-
-const mockControlSwitches: RPG.Command_ControlSwitches = {
-  code: RPG.CONTROL_SWITCHES,
-  parameters: [1, 1, 1],
-  indent: 0,
-};
+import {
+  mockChangeBattleBGM,
+  mockChangeDefeatME,
+  mockChangeVehicleME,
+  mockChangeVictoryME,
+  mockCommonEvent,
+  mockControlSwitches,
+  mockPlayBGM,
+  mockPlayBGS,
+  mockPlayME,
+  mockPlaySE,
+} from "./mockCommands";
 describe("isAudioCommand truthy", () => {
   test("Play BGM", () => {
     expect(isAudioCommand(mockPlayBGM)).toBeTruthy();

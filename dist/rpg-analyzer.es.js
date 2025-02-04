@@ -1,11 +1,11 @@
-const s = "bgm", a = "se", r = "me", i = "bgs", d = (e) => ({
+const c = "bgm", i = "se", r = "me", m = "bgs", l = (e) => ({
   type: 0,
   elementId: 0,
   formula: "0",
   variance: 20,
   critical: !1,
   ...e
-}), l = (e) => ({
+}), u = (e) => ({
   id: 0,
   name: "",
   iconIndex: 0,
@@ -21,12 +21,12 @@ const s = "bgm", a = "se", r = "me", i = "bgs", d = (e) => ({
   tpGain: 0,
   hitType: 0,
   animationId: 0,
-  damage: d(),
+  damage: l(),
   effects: [],
   ...e
-}), f = (e) => !!e, m = (e, o) => e.pages.map(
-  (t, n) => o(t, n, e)
-), p = (e, o) => e.events.filter(f).map((t) => m(t, o)), u = (e, o) => p(e, o).flat(2), E = (e, o) => e.map((t) => m(t, o)), I = (e, o) => e.map((t, n) => o(t, n, { id: t.id })), x = l({ name: "やくそう", price: 50 }), C = (e) => e.folder === a || e.folder === s || e.folder === i || e.folder === r, g = [
+}), f = (e) => !!e, d = (e, t) => e.pages.map(
+  (o, n) => t(o, n, e)
+), p = (e, t) => e.events.filter(f).map((o) => d(o, t)), E = (e, t) => p(e, t).flat(2), g = (e, t) => e.map((o) => d(o, t)), F = (e, t) => e.map((o, n) => t(o, n, o)), C = u({ name: "やくそう", price: 50 }), M = (e) => e.folder === i || e.folder === c || e.folder === m || e.folder === r, A = [
   241,
   245,
   249,
@@ -35,36 +35,53 @@ const s = "bgm", a = "se", r = "me", i = "bgs", d = (e) => ({
   133,
   139,
   140
-], A = (e) => g.includes(e.code), F = (e) => ({
-  folder: b(e) || "",
+], I = (e) => A.includes(e.code), b = (e) => ({
+  folder: x(e) || "",
   fileName: e.parameters[0].name
-}), b = (e) => _[e.code], _ = {
-  241: s,
-  245: i,
+}), x = (e) => v[e.code], v = {
+  241: c,
+  245: m,
   249: r,
-  250: a,
-  132: s,
+  250: i,
+  132: c,
   133: r,
   139: r,
   140: r
-}, c = (e, o, t) => e.list.filter(A).map((n) => ({
+}, s = (e, t, o) => e.list.filter(I).map((n) => ({
   code: n.code,
-  path: F(n),
-  pageIndex: o,
-  eventId: t.id
-})), v = (e) => I(e, c).flat(2), D = (e) => E(e, c).flat(2), G = (e) => ({
+  path: b(n),
+  pageIndex: t,
+  eventId: o.id
+})), h = (e) => F(e, s).flat(2), D = (e) => g(e, s).flat(2), _ = (e) => ({
   bgm: e.bgm,
   bgs: e.bgs,
-  commands: u(e, c)
-});
+  commands: E(e, s)
+}), N = (e) => ({
+  map: _(e.map),
+  filename: e.filename,
+  editingName: e.editingName
+}), B = (e) => ({
+  sounds: a(e.sounds),
+  bgm: a([e.battleBgm, e.titleBgm]),
+  me: a([
+    e.defeatMe,
+    e.gameoverMe,
+    e.victoryMe
+  ])
+}), a = (e) => e.map((t, o) => ({
+  index: o,
+  path: t.name
+}));
 export {
-  F as audioPathFromCommands,
-  c as collectAudioCommands,
+  b as audioPathFromCommands,
+  s as collectAudioCommands,
   D as expectAudioFromTroop,
-  v as extractAudioCFromCommonEvents,
-  G as extractAudioFromMap,
-  A as isAudioCommand,
-  C as isAudioResource,
-  x as item
+  h as extractAudioCFromCommonEvents,
+  _ as extractAudioFromMap,
+  N as extractAudioFromMapFileInfo,
+  I as isAudioCommand,
+  M as isAudioResource,
+  C as item,
+  B as systemAudioFiles
 };
 //# sourceMappingURL=rpg-analyzer.es.js.map

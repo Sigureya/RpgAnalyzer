@@ -1,4 +1,4 @@
-import { Data_CommonEvent, Data_Troop, EventCommand, Map_Audios, MapEventContainer } from '@sigureya/rpgtypes';
+import { Data_CommonEvent, Data_Troop, EventCommand, Map_Audios, MapEventContainer, MapFileInfo } from '@sigureya/rpgtypes';
 import { AudioCommandInfo } from './resourcePath';
 import { MapAudioList } from './types';
 export declare const collectAudioCommands: (page: {
@@ -8,4 +8,7 @@ export declare const collectAudioCommands: (page: {
 }) => AudioCommandInfo[];
 export declare const extractAudioCFromCommonEvents: (events: ReadonlyArray<Data_CommonEvent>) => AudioCommandInfo[];
 export declare const expectAudioFromTroop: (troops: ReadonlyArray<Data_Troop>) => AudioCommandInfo[];
-export declare const extractAudioFromMap: (map: Map_Audios & MapEventContainer<EventCommand>) => MapAudioList;
+type MapType = Map_Audios & MapEventContainer<EventCommand>;
+export declare const extractAudioFromMap: (map: MapType) => MapAudioList;
+export declare const extractAudioFromMapFileInfo: <Map extends MapType>(map: MapFileInfo<Map>) => MapFileInfo<MapAudioList>;
+export {};
