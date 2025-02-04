@@ -1,44 +1,48 @@
-import {
-  collectMapEvents,
-  processEventPages,
-  processMapEvents,
-  readNote,
-  readNoteEx,
-} from "@sigureya/rpg-data-tools";
+import type { CommandParameter } from "@sigureya/rpg-data-tools";
 import type {
-  Data_Map,
-  EventCommand,
+  Data_CommonEvent,
+  Data_Troop,
   MapEvent,
-  MapEventContainer,
-  PickByType,
 } from "@sigureya/rpgtypes";
-import type { ExtractedMapEventText } from "./types";
+import type {
+  ExtractedCommonEventText,
+  ExtractedMapEventText,
+  ExtractedTroopText,
+} from "./types";
 import { extractNoteText } from "./mainData";
+import {
+  extractTextFromEventCommands,
+  extractTextFromEventPages,
+} from "./eventCommand";
 
-const correctEventText = (
+export const correctMapEventText = (
   event: Pick<MapEvent, "note" | "pages" | "id">
 ): ExtractedMapEventText => {
+  const commands: CommandParameter<string>[][][] =
+    extractTextFromEventPages(event);
   return {
     note: extractNoteText(event),
     eventId: event.id,
-    commands: [],
-    //    commands: event.,
+    commands: commands.flat(2),
   };
-  processEventPages(event, () => {});
 };
 
-const correctMapText = (
-  map: MapEventContainer<EventCommand, MapEvent> & PickByType<Data_Map, string>
-) => {
-  return collectMapEvents(map, (page, pageIndex, event) => {
-    //    event.
-    return page.list.map((command) => {
-      return {
-        code: command.code,
-        text: command.parameters[0],
-        pageIndex,
-        eventId: event.id,
-      };
-    });
-  });
+export const extractTextFromTroop = (
+  troop: Pick<Data_Troop, "pages" | "id">
+): ExtractedTroopText => {
+  const commands: CommandParameter<string>[][][] =
+    extractTextFromEventPages(troop);
+  return {
+    troopId: troop.id,
+    commands: commands.flat(2),
+  };
+};
+
+export const extractTextFromCommonEvent = (
+  event: Pick<Data_CommonEvent, "list" | "id">
+): ExtractedCommonEventText => {
+  return {
+    eventId: event.id,
+    commands: extractTextFromEventCommands(event.list).flat(2),
+  };
 };
