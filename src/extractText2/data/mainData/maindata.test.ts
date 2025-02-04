@@ -1,6 +1,5 @@
 import { constructActor } from "@sigureya/rpg-data-tools";
 import { describe, expect, test } from "vitest";
-import { extractTextFromActor } from "./fromRPG";
 import {
   constructEnemy,
   constructArmor,
@@ -16,7 +15,8 @@ import {
   extractTextFromItem,
   extractTextFromSkill,
   extractTextFromState,
-} from "./fromRPG";
+  extractTextFromActor,
+} from "./mainData";
 
 describe("extractTextFromActor", () => {
   const actor = constructActor({
