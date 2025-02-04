@@ -7,6 +7,7 @@ import {
   mappingCommandList,
   normalizedCommands,
   pickCommandParamString,
+  processEventPages,
 } from "@sigureya/rpg-data-tools";
 import type { EventCommand } from "@sigureya/rpgtypes";
 import { type Command_ShowChoices } from "@sigureya/rpgtypes";
@@ -18,6 +19,13 @@ export const extractTextFromEventCommands = (
   // メッセージの表示など結合し、1つのコマンドにまとめる
   const normalized = normalizedCommands(list).flat();
   return mappingCommandList(normalized, extractTextMapper);
+};
+export const extractTextFromEventPages = (event: {
+  pages: { list: EventCommand[] }[];
+}): CommandParam[][][] => {
+  return processEventPages(event, (page) =>
+    extractTextFromEventCommands(page.list)
+  );
 };
 
 export const extractTextMapper: TextCommandMapper<CommandParam[]> = {
@@ -50,7 +58,9 @@ export const extractTextMapper: TextCommandMapper<CommandParam[]> = {
   commentBody: () => [],
 };
 
-const readScript = (script: EventCommandGroup_Script): CommandParam[] => {
+export const readScript = (
+  script: EventCommandGroup_Script
+): CommandParam[] => {
   return [];
 };
 
