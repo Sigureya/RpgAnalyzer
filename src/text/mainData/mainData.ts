@@ -18,7 +18,7 @@ export const extractTextData = <
   T extends { id: number; note: string },
   KeyType extends string & keyof RpgTypes.PickByType<T, string>
 >(
-  data: T & { id: number },
+  data: T,
   keyList: ReadonlyArray<KeyType>
 ): ExtractedText => {
   return {
