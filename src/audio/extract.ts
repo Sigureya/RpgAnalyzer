@@ -9,6 +9,7 @@ import type {
   EventCommand,
   Map_Audios,
   MapEventContainer,
+  MapFileInfo,
 } from "@sigureya/rpgtypes";
 import type { AudioCommandInfo } from "./resourcePath";
 import { audioPathFromCommands, isAudioCommand } from "./resourcePath";
@@ -38,13 +39,20 @@ export const expectAudioFromTroop = (
 ): AudioCommandInfo[] => {
   return processTroopEvents(troops, collectAudioCommands).flat(2);
 };
-
-export const extractAudioFromMap = (
-  map: Map_Audios & MapEventContainer<EventCommand>
-): MapAudioList => {
+type MapType = Map_Audios & MapEventContainer<EventCommand>;
+export const extractAudioFromMap = (map: MapType): MapAudioList => {
   return {
     bgm: map.bgm,
     bgs: map.bgs,
     commands: collectMapEvents(map, collectAudioCommands),
+  };
+};
+export const extractAudioFromMapFileInfo = <Map extends MapType>(
+  map: MapFileInfo<Map>
+): MapFileInfo<MapAudioList> => {
+  return {
+    map: extractAudioFromMap(map.map),
+    filename: map.filename,
+    editingName: map.editingName,
   };
 };
