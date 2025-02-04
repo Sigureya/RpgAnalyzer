@@ -10,10 +10,20 @@ const createData = (
   return { key, text: text, id: data.id };
 };
 
-export const extractNote = (data: {
-  note: string;
-  id: number;
-}): ExtractedText[] => {
+export const extractTextData = <
+  T extends { id: number; note: string },
+  KeyType extends string & keyof RpgTypes.PickByType<T, string>
+>(
+  data: T & { id: number },
+  keyList: ReadonlyArray<KeyType>
+): ExtractedText[] => {
+  return [
+    ...pickString<ExtractedText, T>(data, keyList, createData),
+    ...extractNote(data),
+  ];
+};
+
+const extractNote = (data: { note: string; id: number }): ExtractedText[] => {
   return readNoteEx(data.note, (key, value) =>
     createData(`note.${key}`, value, data)
   );
@@ -22,72 +32,57 @@ export const extractNote = (data: {
 export const extractTextFromActor = (
   actor: TextExtractable<RpgTypes.Data_Actor>
 ): ExtractedText[] => {
-  return [
-    ...pickString(actor, ["name", "nickname", "profile"], createData),
-    ...extractNote(actor),
-  ];
+  return extractTextData(actor, ["name", "nickname", "profile"]);
 };
 
 export const extractTextFromEnemy = (
   enemy: TextExtractable<RpgTypes.Data_Enemy>
 ): ExtractedText[] => {
-  return [...pickString(enemy, ["name"], createData), ...extractNote(enemy)];
+  return extractTextData(enemy, ["name"]);
 };
 
 export const extractTextFromClass = (
   item: TextExtractable<RpgTypes.Data_Class>
 ): ExtractedText[] => {
-  return [...pickString(item, ["name"], createData), ...extractNote(item)];
+  return extractTextData(item, ["name"]);
 };
 
 export const extractTextFromSkill = (
   skill: TextExtractable<RpgTypes.Data_Skill>
 ): ExtractedText[] => {
-  return [
-    ...pickString(
-      skill,
-      ["name", "description", "message1", "message2"],
-      createData
-    ),
-    ...extractNote(skill),
-  ];
+  return extractTextData(skill, [
+    "name",
+    "description",
+    "message1",
+    "message2",
+  ]);
 };
 
 export const extractTextFromItem = (
   item: TextExtractable<RpgTypes.Data_Item>
 ): ExtractedText[] => {
-  return [
-    ...pickString(item, ["name", "description"], createData),
-    ...extractNote(item),
-  ];
+  return extractTextData(item, ["name", "description"]);
 };
 export const extractTextFromWeapon = (
   weapon: TextExtractable<RpgTypes.Data_Weapon>
 ): ExtractedText[] => {
-  return [
-    ...pickString(weapon, ["name", "description"], createData),
-    ...extractNote(weapon),
-  ];
+  return extractTextData(weapon, ["name", "description"]);
 };
 
 export const extractTextFromArmor = (
   armor: TextExtractable<RpgTypes.Data_Armor>
 ): ExtractedText[] => {
-  return [
-    ...pickString(armor, ["name", "description"], createData),
-    ...extractNote(armor),
-  ];
+  return extractTextData(armor, ["name", "description"]);
 };
 
 export const extractTextFromState = (
   state: TextExtractable<RpgTypes.Data_State>
 ): ExtractedText[] => {
-  return [
-    ...pickString(
-      state,
-      ["name", "message1", "message2", "message3", "message4"],
-      createData
-    ),
-    ...extractNote(state),
-  ];
+  return extractTextData(state, [
+    "name",
+    "message1",
+    "message2",
+    "message3",
+    "message4",
+  ]);
 };
