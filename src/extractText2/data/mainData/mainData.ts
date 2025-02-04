@@ -31,9 +31,7 @@ const extractNote = (data: {
   note: string;
   id: number;
 }): ExtractedTextItem[] => {
-  return readNoteEx(data.note, (key, value) =>
-    createData(`note.${key}`, value, data)
-  );
+  return readNoteEx(data.note, (key, value) => createData(key, value, data));
 };
 
 export const extractTextFromActor = (
