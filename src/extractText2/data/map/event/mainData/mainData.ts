@@ -23,11 +23,11 @@ export const extractTextData = <
 ): ExtractedText => {
   return {
     main: pickString<ExtractedTextItem, T>(data, keyList, createData),
-    note: extractNote(data),
+    note: extractNoteText(data),
   };
 };
 
-const extractNote = (data: {
+export const extractNoteText = (data: {
   note: string;
   id: number;
 }): ExtractedTextItem[] => {
