@@ -1,5 +1,7 @@
 import { constructActor } from "@sigureya/rpg-data-tools";
 import { describe, expect, test } from "vitest";
+import type * as RpgTypes from "@sigureya/rpgtypes";
+
 import {
   constructEnemy,
   constructArmor,
@@ -17,42 +19,41 @@ import {
   extractTextFromState,
   extractTextFromActor,
 } from "./mainData";
+import type { ExtractedText, TextExtractable } from "./types";
 
 describe("extractTextFromActor", () => {
-  const actor = constructActor({
+  const expected: ExtractedText = {
+    main: [
+      { key: "name", text: "アクター", id: 1 },
+      { key: "nickname", text: "ニックネーム", id: 1 },
+      { key: "profile", text: "プロフィール", id: 1 },
+    ],
+    note: [],
+  };
+  const actor: TextExtractable<RpgTypes.Data_Actor> = constructActor({
     nickname: "ニックネーム",
     name: "アクター",
     profile: "プロフィール",
     id: 1,
   });
-  test("param", () => {
-    expect(actor.name).toBe("アクター");
-    expect(actor.nickname).toBe("ニックネーム");
-    expect(actor.profile).toBe("プロフィール");
-    expect(actor.id).toBe(1);
-  });
   test("extract", () => {
-    const result = extractTextFromActor(actor);
-    expect(result).toEqual([
-      { key: "name", text: "アクター", id: 1 },
-      { key: "nickname", text: "ニックネーム", id: 1 },
-
-      { key: "profile", text: "プロフィール", id: 1 },
-    ]);
+    const result: ExtractedText = extractTextFromActor(actor);
+    expect(result).toEqual(expected);
   });
 });
+
 describe("extractTextFromEnemy", () => {
-  const enemy = constructEnemy({
+  const enemy: TextExtractable<RpgTypes.Data_Enemy> = constructEnemy({
     name: "エネミー",
     id: 2,
   });
-  test("param", () => {
-    expect(enemy.name).toBe("エネミー");
-    expect(enemy.id).toBe(2);
-  });
+  const expected: ExtractedText = {
+    main: [{ key: "name", text: "エネミー", id: 2 }],
+    note: [],
+  };
   test("extract", () => {
     const result = extractTextFromEnemy(enemy);
-    expect(result).toEqual([{ key: "name", text: "エネミー", id: 2 }]);
+    expect(result).toEqual(expected);
   });
 });
 
@@ -62,6 +63,13 @@ describe("extractTextFromArmor", () => {
     description: "アーマー説明",
     id: 3,
   });
+  const expected: ExtractedText = {
+    main: [
+      { key: "name", text: "アーマー", id: 3 },
+      { key: "description", text: "アーマー説明", id: 3 },
+    ],
+    note: [],
+  };
   test("param", () => {
     expect(armor.name).toBe("アーマー");
     expect(armor.description).toBe("アーマー説明");
@@ -69,10 +77,7 @@ describe("extractTextFromArmor", () => {
   });
   test("extract", () => {
     const result = extractTextFromArmor(armor);
-    expect(result).toEqual([
-      { key: "name", text: "アーマー", id: 3 },
-      { key: "description", text: "アーマー説明", id: 3 },
-    ]);
+    expect(result).toEqual(expected);
   });
 });
 
@@ -82,17 +87,22 @@ describe("extractTextFromWeapon", () => {
     description: "ウェポン説明",
     id: 4,
   });
+
   test("param", () => {
     expect(weapon.name).toBe("ウェポン");
     expect(weapon.description).toBe("ウェポン説明");
     expect(weapon.id).toBe(4);
   });
-  test("extract", () => {
-    const result = extractTextFromWeapon(weapon);
-    expect(result).toEqual([
+  const expected: ExtractedText = {
+    main: [
       { key: "name", text: "ウェポン", id: 4 },
       { key: "description", text: "ウェポン説明", id: 4 },
-    ]);
+    ],
+    note: [],
+  };
+  test("extract", () => {
+    const result = extractTextFromWeapon(weapon);
+    expect(result).toEqual(expected);
   });
 });
 
@@ -107,12 +117,16 @@ describe("extractTextFromItem", () => {
     expect(item.description).toBe("アイテム説明");
     expect(item.id).toBe(5);
   });
-  test("extract", () => {
-    const result = extractTextFromItem(item);
-    expect(result).toEqual([
+  const expected: ExtractedText = {
+    main: [
       { key: "name", text: "アイテム", id: 5 },
       { key: "description", text: "アイテム説明", id: 5 },
-    ]);
+    ],
+    note: [],
+  };
+  test("extract", () => {
+    const result = extractTextFromItem(item);
+    expect(result).toEqual(expected);
   });
 });
 
@@ -129,14 +143,18 @@ describe("extractTextFromSkill", () => {
     expect(skill.description).toBe("スキル説明");
     expect(skill.id).toBe(6);
   });
-  test("extract", () => {
-    const result = extractTextFromSkill(skill);
-    expect(result).toEqual([
+  const expected: ExtractedText = {
+    main: [
       { key: "name", text: "スキル", id: 6 },
       { key: "description", text: "スキル説明", id: 6 },
       { key: "message1", text: "msg1", id: 6 },
       { key: "message2", text: "msg2", id: 6 },
-    ]);
+    ],
+    note: [],
+  };
+  test("extract", () => {
+    const result = extractTextFromSkill(skill);
+    expect(result).toEqual(expected);
   });
 });
 
@@ -158,14 +176,19 @@ describe("extractTextFromState", () => {
     expect(state.message3).toBe("msg3");
     expect(state.message4).toBe("msg4");
   });
-  test("extract", () => {
-    const result = extractTextFromState(state);
-    expect(result).toEqual([
+  const expected: ExtractedText = {
+    main: [
       { key: "name", text: "ステート", id: 7 },
       { key: "message1", text: "msg1", id: 7 },
       { key: "message2", text: "msg2", id: 7 },
       { key: "message3", text: "msg3", id: 7 },
       { key: "message4", text: "msg4", id: 7 },
-    ]);
+    ],
+    note: [],
+  };
+
+  test("extract", () => {
+    const result = extractTextFromState(state);
+    expect(result).toEqual(expected);
   });
 });
