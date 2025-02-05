@@ -16,13 +16,15 @@ export const extractedImageItem = (
 };
 
 export const extractImageData = <
-  T extends { id: number; note: string },
+  T extends { note: string } & Record<KeyType, string>,
   KeyType extends string & keyof RpgTypes.PickByType<T, string>
 >(
-  data: T,
+  data: T & { id: number },
   keyList: ReadonlyArray<KeyType>
 ): ExtractedImageItem[] => {
-  return pickString<ExtractedImageItem, T>(data, keyList, extractedImageItem);
+  return pickString<ExtractedImageItem, T>(data, keyList, (key, value) =>
+    extractedImageItem(key, value, data)
+  );
 };
 
 export const extractImageFromActor = (
