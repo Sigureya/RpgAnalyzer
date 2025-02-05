@@ -1,8 +1,8 @@
-const g = "bgm", B = "se", d = "me", T = "bgs", E = (e, t) => t ? e === t.code : !1, P = "MessageHeader invalid command", k = "Invalid Head", w = (e) => typeof e[0] == "string" && e.length === 1, i = (e, t, r) => {
+const E = "bgm", T = "se", d = "me", w = "bgs", p = (e, t) => t ? e === t.code : !1, P = "MessageHeader invalid command", k = "Invalid Head", C = (e) => typeof e[0] == "string" && e.length === 1, i = (e, t, r) => {
   const o = [];
   for (let s = r; s < t.length; s++) {
     const h = t[s];
-    if (E(e, h) && w(h.parameters))
+    if (p(e, h) && C(h.parameters))
       o.push({
         code: e,
         indent: h.indent,
@@ -12,32 +12,32 @@ const g = "bgm", B = "se", d = "me", T = "bgs", E = (e, t) => t ? e === t.code :
       break;
   }
   return o;
-}, C = (e, t, r) => {
+}, I = (e, t, r) => {
   const o = e[t];
-  if (o && E(r, o) && w(o.parameters))
+  if (o && p(r, o) && C(o.parameters))
     return {
       code: r,
       indent: o.indent,
       parameters: [o.parameters[0]]
     };
   throw new Error(k, { cause: o });
-}, D = (e, t) => ({
-  head: C(e, t, 108),
+}, G = (e, t) => ({
+  head: I(e, t, 108),
   bodys: i(408, e, t + 1)
-}), G = (e, t) => ({
-  head: C(e, t, 355),
+}), L = (e, t) => ({
+  head: I(e, t, 355),
   bodys: i(655, e, t + 1)
-}), L = (e, t) => {
+}), _ = (e, t) => {
   const r = e[t];
-  if (r && W(r))
+  if (r && D(r))
     return r;
   throw new Error(P, { cause: r });
-}, W = (e) => !e || e.code !== 101 || ![4, 5].includes(e.parameters.length) ? !1 : typeof e.parameters[0] == "string" && typeof e.parameters[1] == "number" && typeof e.parameters[2] == "number" && typeof e.parameters[3] == "number", _ = (e, t) => ({
-  head: L(e, t),
+}, D = (e) => !e || e.code !== 101 || ![4, 5].includes(e.parameters.length) ? !1 : typeof e.parameters[0] == "string" && typeof e.parameters[1] == "number" && typeof e.parameters[2] == "number" && typeof e.parameters[3] == "number", W = (e, t) => ({
+  head: _(e, t),
   bodys: i(401, e, t + 1)
 }), z = "ScrollTextHeader invalid command", V = (e, t) => {
   const r = e[t];
-  if (E(105, r))
+  if (p(105, r))
     return r;
   const o = {
     headCode: 105,
@@ -50,7 +50,7 @@ const g = "bgm", B = "se", d = "me", T = "bgs", E = (e, t) => t ? e === t.code :
   bodys: i(405, e, t + 1)
 }), H = (e, t = `
 `) => e.map((r) => r.parameters[0]).join(t);
-class I {
+class F {
   constructor(t, r) {
     this.header = t, this.bodies = r;
   }
@@ -65,7 +65,7 @@ class I {
     return this.getExpandedBodies();
   }
 }
-class p extends I {
+class x extends F {
   constructor(t, r, o) {
     super(r, o), this.bodyCode = t;
   }
@@ -89,7 +89,7 @@ class p extends I {
     };
   }
 }
-class F extends I {
+class S extends F {
   getExpandedBodies() {
     return [this.header, ...this.bodies];
   }
@@ -104,26 +104,26 @@ class F extends I {
     return [this.mergedBody()];
   }
 }
-const Q = "選択肢ヘルプ", R = (e) => e.parameters[0] === Q, O = (e, t = []) => new p(401, e, t), Z = (e, t = []) => new p(405, e, t), j = (e, t = []) => R(e) ? new p(
+const Q = "選択肢ヘルプ", R = (e) => e.parameters[0] === Q, O = (e, t = []) => new x(401, e, t), Z = (e, t = []) => new x(405, e, t), j = (e, t = []) => R(e) ? new x(
   408,
   e,
   t
-) : new F(
+) : new S(
   e,
   t
-), U = (e, t = []) => new F(e, t), q = (e, t, r) => {
-  const o = _(e, t), s = O(o.head, o.bodys);
+), U = (e, t = []) => new S(e, t), q = (e, t, r) => {
+  const o = W(e, t), s = O(o.head, o.bodys);
   return r(s);
 }, K = (e, t, r) => {
   const o = J(e, t), s = Z(o.head, o.bodys);
   return r(s);
 }, Y = (e, t, r) => {
-  const o = D(e, t), s = j(o.head, o.bodys);
+  const o = G(e, t), s = j(o.head, o.bodys);
   return r(s);
 }, X = (e, t, r) => {
-  const o = G(e, t), s = U(o.head, o.bodys);
+  const o = L(e, t), s = U(o.head, o.bodys);
   return r(s);
-}, a = (e, t, r, o, s) => o ? o(e, t, r) : s(e, t, r), x = (e, t) => e.map((r, o) => $(e, o, t)), $ = (e, t, r) => {
+}, a = (e, t, r, o, s) => o ? o(e, t, r) : s(e, t, r), f = (e, t) => e.map((r, o) => $(e, o, t)), $ = (e, t, r) => {
   const o = e[t];
   switch (o.code) {
     // メッセージ関連
@@ -266,19 +266,19 @@ const Q = "選択肢ヘルプ", R = (e) => e.parameters[0] === Q, O = (e, t = []
   comment: (e) => e.normalizedCommands(),
   script: (e) => e.normalizedCommands(),
   other: (e) => [e]
-}, re = (e) => x(e, ee), te = (e) => !!e, f = (e, t) => e.pages.map(
+}, re = (e) => f(e, ee), te = (e) => !!e, b = (e, t) => e.pages.map(
   (r, o) => t(r, o, e)
-), oe = (e, t) => e.events.filter(te).map((r) => f(r, t)), ae = (e, t) => oe(e, t).flat(2), se = (e, t) => e.map((r) => f(r, t)), ne = (e, t) => e.map((r, o) => t(r, o, r)), ce = () => /<([^<>:]+):([^>]*)>/g, me = (e, t) => {
+), oe = (e, t) => e.events.filter(te).map((r) => b(r, t)), ae = (e, t) => oe(e, t).flat(2), se = (e, t) => e.map((r) => b(r, t)), ne = (e, t) => e.map((r, o) => t(r, o, r)), ce = () => /<([^<>:]+):([^>]*)>/g, me = (e, t) => {
   const r = ce(), o = [];
   let s;
   for (; (s = r.exec(e)) !== null; )
     o.push(t(s[1], s[2]));
   return o;
-}, de = (e, t, r) => t.map((o) => r(o, e[o], e)), S = (e, t, r) => de(e, t, r), c = (e, t) => ({
+}, de = (e, t, r) => t.map((o) => r(o, e[o], e)), he = (e, t, r) => de(e, t, r), c = (e, t) => ({
   code: e.code,
   paramIndex: t,
   value: e.parameters[t]
-}), Te = (e) => e.folder === B || e.folder === g || e.folder === T || e.folder === d, he = [
+}), Be = (e) => e.folder === T || e.folder === E || e.folder === w || e.folder === d, ie = [
   241,
   245,
   249,
@@ -287,32 +287,32 @@ const Q = "選択肢ヘルプ", R = (e) => e.parameters[0] === Q, O = (e, t = []
   133,
   139,
   140
-], ie = (e) => he.includes(e.code), ue = (e) => ({
-  folder: le(e) || "",
+], ue = (e) => ie.includes(e.code), le = (e) => ({
+  folder: ge(e) || "",
   fileName: e.parameters[0].name
-}), le = (e) => ge[e.code], ge = {
-  241: g,
-  245: T,
+}), ge = (e) => Ee[e.code], Ee = {
+  241: E,
+  245: w,
   249: d,
-  250: B,
-  132: g,
+  250: T,
+  132: E,
   133: d,
   139: d,
   140: d
-}, b = (e, t, r) => e.list.filter(ie).map((o) => ({
+}, y = (e, t, r) => e.list.filter(ue).map((o) => ({
   code: o.code,
-  path: ue(o),
+  path: le(o),
   pageIndex: t,
   eventId: r.id
-})), we = (e) => ne(e, b).flat(2), Ce = (e) => se(e, b).flat(2), Ee = (e) => ({
+})), Te = (e) => ne(e, y).flat(2), we = (e) => se(e, y).flat(2), pe = (e) => ({
   bgm: e.bgm,
   bgs: e.bgs,
-  commands: ae(e, b)
-}), Ie = (e) => ({
-  map: Ee(e.map),
+  commands: ae(e, y)
+}), Ce = (e) => ({
+  map: pe(e.map),
   filename: e.filename,
   editingName: e.editingName
-}), Fe = (e) => ({
+}), Ie = (e) => ({
   sounds: u(e.sounds),
   bgm: u([e.battleBgm, e.titleBgm]),
   me: u([
@@ -324,14 +324,14 @@ const Q = "選択肢ヘルプ", R = (e) => e.parameters[0] === Q, O = (e, t = []
   index: r,
   path: t.name
 })), v = (e, t, r) => ({ key: e, text: t, id: r.id }), m = (e, t) => ({
-  main: S(e, t, (r, o) => v(r, o, e)),
+  main: he(e, t, (r, o) => v(r, o, e)),
   note: A(e)
-}), A = (e) => me(e.note, (t, r) => v(t, r, e)), Se = (e) => m(e, ["name", "nickname", "profile"]), ve = (e) => m(e, ["name"]), Ae = (e) => m(e, ["name"]), Me = (e) => m(e, [
+}), A = (e) => me(e.note, (t, r) => v(t, r, e)), Fe = (e) => m(e, ["name", "nickname", "profile"]), Se = (e) => m(e, ["name"]), ve = (e) => m(e, ["name"]), Ae = (e) => m(e, [
   "name",
   "description",
   "message1",
   "message2"
-]), Ne = (e) => m(e, ["name", "description"]), Pe = (e) => m(e, ["name", "description"]), ke = (e) => m(e, ["name", "description"]), De = (e) => m(e, [
+]), Me = (e) => m(e, ["name", "description"]), Ne = (e) => m(e, ["name", "description"]), Pe = (e) => m(e, ["name", "description"]), ke = (e) => m(e, [
   "name",
   "message1",
   "message2",
@@ -339,15 +339,15 @@ const Q = "選択肢ヘルプ", R = (e) => e.parameters[0] === Q, O = (e, t = []
   "message4"
 ]), M = (e) => {
   const t = re(e).flat();
-  return x(t, pe);
-}, N = (e) => f(
+  return f(t, xe);
+}, N = (e) => b(
   e,
   (t) => M(t.list)
-), pe = {
+), xe = {
   changeName: (e) => [c(e, 1)],
   changeNickname: (e) => [c(e, 1)],
   changeProfile: (e) => [c(e, 1)],
-  showChoices: (e) => fe(e),
+  showChoices: (e) => be(e),
   showScrollingText: (e) => [c(e.mergedBody(), 0)],
   showMessage: (e) => {
     const t = e.normalizedCommands(), r = c(t[0], 4), o = t[1];
@@ -360,10 +360,10 @@ const Q = "選択肢ヘルプ", R = (e) => e.parameters[0] === Q, O = (e, t = []
     const t = e.mergedBody();
     return [c(t, 0)];
   },
-  script: (e) => xe(),
+  script: (e) => fe(),
   other: () => [],
   commentBody: () => []
-}, xe = (e) => [], fe = (e) => e.parameters[0].map((t, r) => ({
+}, fe = (e) => [], be = (e) => e.parameters[0].map((t, r) => ({
   code: e.code,
   paramIndex: r,
   value: t
@@ -380,13 +380,13 @@ const Q = "選択肢ヘルプ", R = (e) => e.parameters[0] === Q, O = (e, t = []
     troopId: e.id,
     commands: t.flat(2)
   };
-}, We = (e) => ({
+}, _e = (e) => ({
   eventId: e.id,
   commands: M(e.list).flat(2)
-}), _e = (e) => x(e, be), n = (e, t, r) => ({
+}), De = (e) => f(e, ye), n = (e, t, r) => ({
   folderName: r,
   command: c(e, t)
-}), be = {
+}), ye = {
   changeActorImages: (e) => [
     n(e, 1, "characters"),
     n(e, 3, "faces"),
@@ -400,62 +400,65 @@ const Q = "選択肢ヘルプ", R = (e) => e.parameters[0] === Q, O = (e, t = []
   changeParallax: (e) => [n(e, 0, "parallaxes")],
   changeVehicleImage: (e) => [n(e, 1, "characters")],
   other: () => []
-}, ze = (e) => ({
+}, We = (e) => ({
   key: "battlerName",
   image: e.battlerName,
   id: e.id
-}), ye = (e, t, r) => ({ key: e, image: t, id: r.id }), Be = (e, t) => S(
-  e,
-  t,
-  (r, o) => ye(r, o, e)
-), Ve = (e) => Be(e, ["characterName", "faceName", "battlerName"]), l = (e, t) => ({
+}), l = (e, t, r) => ({
+  folder: r,
+  key: t,
+  image: e[t],
+  id: e.id
+}), ze = (e) => [
+  l(e, "faceName", "faces"),
+  l(e, "characterName", "characters"),
+  l(e, "battlerName", "sv_actors")
+], g = (e, t) => ({
   folder: "characters",
   key: t,
   image: e[t].characterName
-}), y = (e, t, r) => ({
+}), B = (e, t, r) => ({
   folder: r,
   key: t,
   image: e[t]
-}), Je = (e) => [
-  y(e, "title1Name", "titles1"),
-  y(e, "title2Name", "titles2"),
-  l(e, "boat"),
-  l(e, "ship"),
-  l(e, "airship")
+}), Ve = (e) => [
+  B(e, "title1Name", "titles1"),
+  B(e, "title2Name", "titles2"),
+  g(e, "boat"),
+  g(e, "ship"),
+  g(e, "airship")
 ];
 export {
-  ue as audioPathFromCommands,
-  b as collectAudioCommands,
-  fe as commandChoice,
+  le as audioPathFromCommands,
+  y as collectAudioCommands,
+  be as commandChoice,
   Ge as correctMapEventText,
-  Ce as expectAudioFromTroop,
-  we as extractAudioCFromCommonEvents,
-  Ee as extractAudioFromMap,
-  Ie as extractAudioFromMapFileInfo,
-  Be as extractImageData,
-  Ve as extractImageFromActor,
-  ze as extractImageFromEnemy,
-  Je as extractImageFromSystem,
-  _e as extractImagesFromCommands,
+  we as expectAudioFromTroop,
+  Te as extractAudioCFromCommonEvents,
+  pe as extractAudioFromMap,
+  Ce as extractAudioFromMapFileInfo,
+  ze as extractImageFromActor,
+  We as extractImageFromEnemy,
+  Ve as extractImageFromSystem,
+  De as extractImagesFromCommands,
   A as extractNoteText,
   m as extractTextData,
-  Se as extractTextFromActor,
-  ke as extractTextFromArmor,
-  Ae as extractTextFromClass,
-  We as extractTextFromCommonEvent,
-  ve as extractTextFromEnemy,
+  Fe as extractTextFromActor,
+  Pe as extractTextFromArmor,
+  ve as extractTextFromClass,
+  _e as extractTextFromCommonEvent,
+  Se as extractTextFromEnemy,
   M as extractTextFromEventCommands,
   N as extractTextFromEventPages,
-  Ne as extractTextFromItem,
-  Me as extractTextFromSkill,
-  De as extractTextFromState,
+  Me as extractTextFromItem,
+  Ae as extractTextFromSkill,
+  ke as extractTextFromState,
   Le as extractTextFromTroop,
-  Pe as extractTextFromWeapon,
-  pe as extractTextMapper,
-  ye as extractedImageItem,
-  ie as isAudioCommand,
-  Te as isAudioResource,
-  xe as readScript,
-  Fe as systemAudioFiles
+  Ne as extractTextFromWeapon,
+  xe as extractTextMapper,
+  ue as isAudioCommand,
+  Be as isAudioResource,
+  fe as readScript,
+  Ie as systemAudioFiles
 };
 //# sourceMappingURL=rpg-analyzer.es.js.map
