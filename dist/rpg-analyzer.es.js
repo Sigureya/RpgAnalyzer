@@ -24,16 +24,16 @@ const u = "bgm", x = "se", d = "me", f = "bgs", l = (e, r) => r ? e === r.code :
 }, M = (e, r) => ({
   head: w(e, r, 108),
   bodys: i(408, e, r + 1)
-}), k = (e, r) => ({
+}), N = (e, r) => ({
   head: w(e, r, 355),
   bodys: i(655, e, r + 1)
-}), N = (e, r) => {
+}), k = (e, r) => {
   const t = e[r];
   if (t && z(t))
     return t;
   throw new Error(A, { cause: t });
 }, z = (e) => !e || e.code !== 101 || ![4, 5].includes(e.parameters.length) ? !1 : typeof e.parameters[0] == "string" && typeof e.parameters[1] == "number" && typeof e.parameters[2] == "number" && typeof e.parameters[3] == "number", D = (e, r) => ({
-  head: N(e, r),
+  head: k(e, r),
   bodys: i(401, e, r + 1)
 }), G = "ScrollTextHeader invalid command", L = (e, r) => {
   const t = e[r];
@@ -48,7 +48,7 @@ const u = "bgm", x = "se", d = "me", f = "bgs", l = (e, r) => r ? e === r.code :
 }, _ = (e, r) => ({
   head: L(e, r),
   bodys: i(405, e, r + 1)
-}), J = (e, r = `
+}), P = (e, r = `
 `) => e.map((t) => t.parameters[0]).join(r);
 class T {
   constructor(r, t) {
@@ -56,7 +56,7 @@ class T {
   }
   getBodyText(r = `
 `) {
-    return J(this.getExpandedBodies(), r);
+    return P(this.getExpandedBodies(), r);
   }
   jopinHedderAndBody() {
     return [this.header, ...this.bodies];
@@ -104,42 +104,42 @@ class b extends T {
     return [this.mergedBody()];
   }
 }
-const P = "選択肢ヘルプ", W = (e) => e.parameters[0] === P, H = (e, r = []) => new g(401, e, r), R = (e, r = []) => new g(405, e, r), V = (e, r = []) => W(e) ? new g(
+const J = "選択肢ヘルプ", W = (e) => e.parameters[0] === J, H = (e, r = []) => new g(401, e, r), Q = (e, r = []) => new g(405, e, r), R = (e, r = []) => W(e) ? new g(
   408,
   e,
   r
 ) : new b(
   e,
   r
-), Y = (e, r = []) => new b(e, r), j = (e, r, t) => {
+), V = (e, r = []) => new b(e, r), Z = (e, r, t) => {
   const o = D(e, r), a = H(o.head, o.bodys);
   return t(a);
+}, j = (e, r, t) => {
+  const o = _(e, r), a = Q(o.head, o.bodys);
+  return t(a);
 }, O = (e, r, t) => {
-  const o = _(e, r), a = R(o.head, o.bodys);
+  const o = M(e, r), a = R(o.head, o.bodys);
   return t(a);
 }, U = (e, r, t) => {
-  const o = M(e, r), a = V(o.head, o.bodys);
+  const o = N(e, r), a = V(o.head, o.bodys);
   return t(a);
-}, K = (e, r, t) => {
-  const o = k(e, r), a = Y(o.head, o.bodys);
-  return t(a);
-}, s = (e, r, t, o, a) => o ? o(e, r, t) : a(e, r, t), B = (e, r) => e.map((t, o) => Q(e, o, r)), Q = (e, r, t) => {
+}, s = (e, r, t, o, a) => o ? o(e, r, t) : a(e, r, t), B = (e, r) => e.map((t, o) => K(e, o, r)), K = (e, r, t) => {
   const o = e[r];
   switch (o.code) {
     case 101:
-      return t.showMessage ? j(e, r, t.showMessage) : t.other(o, r, e);
+      return t.showMessage ? Z(e, r, t.showMessage) : t.other(o, r, e);
     case 401:
       return s(o, r, e, t.showMessageBody, t.other);
     case 105:
-      return t.showScrollingText ? O(e, r, t.showScrollingText) : t.other(o, r, e);
+      return t.showScrollingText ? j(e, r, t.showScrollingText) : t.other(o, r, e);
     case 405:
       return s(o, r, e, t.showScrollingTextBody, t.other);
     case 108:
-      return t.comment ? U(e, r, t.comment) : t.other(o, r, e);
+      return t.comment ? O(e, r, t.comment) : t.other(o, r, e);
     case 408:
       return s(o, r, e, t.commentBody, t.other);
     case 355:
-      return t.script ? K(e, r, t.script) : t.other(o, r, e);
+      return t.script ? U(e, r, t.script) : t.other(o, r, e);
     case 655:
       return s(o, r, e, t.scriptBody, t.other);
     case 121:
@@ -210,7 +210,7 @@ const P = "選択肢ヘルプ", W = (e) => e.parameters[0] === P, H = (e, r = []
       return s(o, r, e, t.gameover, t.other);
   }
   return t.other(o, r, e);
-}, X = {
+}, Y = {
   // body部分は空の要素で置き換える
   commentBody: () => [],
   showMessageBody: () => [],
@@ -222,9 +222,9 @@ const P = "選択肢ヘルプ", W = (e) => e.parameters[0] === P, H = (e, r = []
   comment: (e) => e.normalizedCommands(),
   script: (e) => e.normalizedCommands(),
   other: (e) => [e]
-}, Z = (e) => B(e, X), q = (e) => !!e, p = (e, r) => e.pages.map(
+}, q = (e) => B(e, Y), X = (e) => !!e, p = (e, r) => e.pages.map(
   (t, o) => r(t, o, e)
-), $ = (e, r) => e.events.filter(q).map((t) => p(t, r)), ee = (e, r) => $(e, r).flat(2), re = (e, r) => e.map((t) => p(t, r)), te = (e, r) => e.map((t, o) => r(t, o, t)), oe = () => /<([^<>:]+):([^>]*)>/g, se = (e, r) => {
+), $ = (e, r) => e.events.filter(X).map((t) => p(t, r)), ee = (e, r) => $(e, r).flat(2), re = (e, r) => e.map((t) => p(t, r)), te = (e, r) => e.map((t, o) => r(t, o, t)), oe = () => /<([^<>:]+):([^>]*)>/g, se = (e, r) => {
   const t = oe(), o = [];
   let a;
   for (; (a = t.exec(e)) !== null; )
@@ -280,25 +280,25 @@ const P = "選択肢ヘルプ", W = (e) => e.parameters[0] === P, H = (e, r = []
   index: t,
   path: r.name
 })), C = (e, r, t) => ({ key: e, text: r, id: t.id }), n = (e, r) => ({
-  main: ne(e, r, C),
+  main: ne(e, r, (t, o) => C(t, o, e)),
   note: F(e)
 }), F = (e) => se(e.note, (r, t) => C(r, t, e)), Te = (e) => n(e, ["name", "nickname", "profile"]), be = (e) => n(e, ["name"]), Be = (e) => n(e, ["name"]), Ce = (e) => n(e, [
   "name",
   "description",
   "message1",
   "message2"
-]), Fe = (e) => n(e, ["name", "description"]), ve = (e) => n(e, ["name", "description"]), Se = (e) => n(e, ["name", "description"]), Ae = (e) => n(e, [
+]), Fe = (e) => n(e, ["name", "description"]), Se = (e) => n(e, ["name", "description"]), ve = (e) => n(e, ["name", "description"]), Ae = (e) => n(e, [
   "name",
   "message1",
   "message2",
   "message3",
   "message4"
-]), v = (e) => {
-  const r = Z(e).flat();
+]), S = (e) => {
+  const r = q(e).flat();
   return B(r, le);
-}, S = (e) => p(
+}, v = (e) => p(
   e,
-  (r) => v(r.list)
+  (r) => S(r.list)
 ), le = {
   changeName: (e) => [c(e, 1)],
   changeNickname: (e) => [c(e, 1)],
@@ -324,21 +324,21 @@ const P = "選択肢ヘルプ", W = (e) => e.parameters[0] === P, H = (e, r = []
   paramIndex: t,
   value: r
 })), Ie = (e) => {
-  const r = S(e);
+  const r = v(e);
   return {
     note: F(e),
     eventId: e.id,
     commands: r.flat(2)
   };
 }, Me = (e) => {
-  const r = S(e);
+  const r = v(e);
   return {
     troopId: e.id,
     commands: r.flat(2)
   };
-}, ke = (e) => ({
+}, Ne = (e) => ({
   eventId: e.id,
-  commands: v(e.list).flat(2)
+  commands: S(e.list).flat(2)
 });
 export {
   me as audioPathFromCommands,
@@ -352,17 +352,17 @@ export {
   F as extractNoteText,
   n as extractTextData,
   Te as extractTextFromActor,
-  Se as extractTextFromArmor,
+  ve as extractTextFromArmor,
   Be as extractTextFromClass,
-  ke as extractTextFromCommonEvent,
+  Ne as extractTextFromCommonEvent,
   be as extractTextFromEnemy,
-  v as extractTextFromEventCommands,
-  S as extractTextFromEventPages,
+  S as extractTextFromEventCommands,
+  v as extractTextFromEventPages,
   Fe as extractTextFromItem,
   Ce as extractTextFromSkill,
   Ae as extractTextFromState,
   Me as extractTextFromTroop,
-  ve as extractTextFromWeapon,
+  Se as extractTextFromWeapon,
   le as extractTextMapper,
   de as isAudioCommand,
   Ee as isAudioResource,
