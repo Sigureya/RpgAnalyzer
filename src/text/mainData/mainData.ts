@@ -15,14 +15,16 @@ const createData = (
 };
 
 export const extractTextData = <
-  T extends { id: number; note: string },
+  T extends { note: string } & Record<KeyType, string>,
   KeyType extends string & keyof RpgTypes.PickByType<T, string>
 >(
   data: T & { id: number },
   keyList: ReadonlyArray<KeyType>
 ): ExtractedText => {
   return {
-    main: pickString<ExtractedTextItem, T>(data, keyList, createData),
+    main: pickString<ExtractedTextItem, T>(data, keyList, (key, value) => {
+      return createData(key, value, data);
+    }),
     note: extractNoteText(data),
   };
 };

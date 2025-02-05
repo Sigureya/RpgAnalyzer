@@ -1,9 +1,8 @@
 import { ExtractedText, ExtractedTextItem, TextExtractable } from './types';
 import type * as RpgTypes from "@sigureya/rpgtypes";
 export declare const extractTextData: <T extends {
-    id: number;
     note: string;
-}, KeyType extends string & keyof RpgTypes.PickByType<T, string>>(data: T & {
+} & Record<KeyType, string>, KeyType extends string & keyof RpgTypes.PickByType<T, string>>(data: T & {
     id: number;
 }, keyList: ReadonlyArray<KeyType>) => ExtractedText;
 export declare const extractNoteText: (data: {
