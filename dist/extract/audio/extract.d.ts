@@ -1,6 +1,6 @@
 import { Data_CommonEvent, Data_Troop, EventCommand, Map_Audios, MapEventContainer, MapFileInfo } from '@sigureya/rpgtypes';
-import { AudioCommandInfo } from './resourcePath';
 import { MapAudioList } from './types';
+import { AudioCommandInfo } from './eventCommand';
 export declare const collectAudioCommands: (page: {
     list: EventCommand[];
 }, pageIndex: number, event: {

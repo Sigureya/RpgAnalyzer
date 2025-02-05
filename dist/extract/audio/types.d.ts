@@ -1,5 +1,5 @@
 import { AudioFileParams, MapFileInfo } from '@sigureya/rpgtypes';
-import { AudioCommandInfo } from './resourcePath';
+import { AudioCommandInfo } from './eventCommand';
 export interface MapAudioList {
     commands: AudioCommandInfo[];
     bgm: AudioFileParams;

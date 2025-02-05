@@ -5,8 +5,8 @@ import type {
 } from "@sigureya/rpgtypes";
 import { describe, expect, test } from "vitest";
 import { extractAudioFromMap } from "./extract";
-import { mockCommonEvent, mockPlayBGM } from "./resourcePath/mockCommands";
-import type { AudioCommandInfo } from "./resourcePath";
+import type { AudioCommandInfo } from "./eventCommand";
+import { mockPlayBGM, mockCommonEvent } from "./eventCommand/mockCommands";
 
 const mockMap: Map_Audios &
   MapEventContainer<EventCommand, { id: number; name: string }> = {

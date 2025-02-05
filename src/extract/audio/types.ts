@@ -1,5 +1,5 @@
 import type { AudioFileParams, MapFileInfo } from "@sigureya/rpgtypes";
-import type { AudioCommandInfo } from "./resourcePath";
+import type { AudioCommandInfo } from "./eventCommand";
 
 export interface MapAudioList {
   commands: AudioCommandInfo[];
