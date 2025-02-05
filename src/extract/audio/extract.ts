@@ -11,9 +11,9 @@ import type {
   MapEventContainer,
   MapFileInfo,
 } from "@sigureya/rpgtypes";
-import type { AudioCommandInfo } from "./resourcePath";
-import { audioPathFromCommands, isAudioCommand } from "./resourcePath";
 import type { MapAudioList } from "./types";
+import type { AudioCommandInfo } from "./eventCommand";
+import { isAudioCommand, audioPathFromCommands } from "./eventCommand";
 
 export const collectAudioCommands = (
   page: { list: EventCommand[] },
