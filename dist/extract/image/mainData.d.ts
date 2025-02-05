@@ -4,6 +4,13 @@ export interface ExtractedImageItem {
     image: string;
     id: number;
 }
+export interface ExtractedImageItem2 {
+    folder: RpgTypes.ImageFolders;
+    key: string;
+    image: string;
+    id: number;
+}
+export declare const extractImageFromEnemy: (enemy: Pick<RpgTypes.Data_Enemy, "id" | "battlerName">) => ExtractedImageItem;
 export declare const extractedImageItem: (key: string, image: string, data: {
     id: number;
 }) => ExtractedImageItem;
@@ -13,4 +20,3 @@ export declare const extractImageData: <T extends {
     id: number;
 }, keyList: ReadonlyArray<KeyType>) => ExtractedImageItem[];
 export declare const extractImageFromActor: (actor: RpgTypes.Data_Actor) => ExtractedImageItem[];
-export declare const extractImageFromEnemy: (enemy: RpgTypes.Data_Enemy) => ExtractedImageItem[];

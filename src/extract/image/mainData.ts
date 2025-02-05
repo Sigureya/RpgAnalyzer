@@ -6,6 +6,22 @@ export interface ExtractedImageItem {
   image: string;
   id: number;
 }
+export interface ExtractedImageItem2 {
+  folder: RpgTypes.ImageFolders;
+  key: string;
+  image: string;
+  id: number;
+}
+
+export const extractImageFromEnemy = (
+  enemy: Pick<RpgTypes.Data_Enemy, "id" | "battlerName">
+): ExtractedImageItem => {
+  return {
+    key: "battlerName",
+    image: enemy.battlerName,
+    id: enemy.id,
+  };
+};
 
 export const extractedImageItem = (
   key: string,
@@ -31,10 +47,4 @@ export const extractImageFromActor = (
   actor: RpgTypes.Data_Actor
 ): ExtractedImageItem[] => {
   return extractImageData(actor, ["characterName", "faceName", "battlerName"]);
-};
-
-export const extractImageFromEnemy = (
-  enemy: RpgTypes.Data_Enemy
-): ExtractedImageItem[] => {
-  return extractImageData(enemy, ["battlerName"]);
 };
