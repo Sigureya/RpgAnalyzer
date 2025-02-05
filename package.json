@@ -37,6 +37,7 @@
     "vitest": "^2.1.9"
   },
   "dependencies": {
+    "@sigureya/rmmzmock": "github:Sigureya/RmmzMock",
     "@sigureya/rpg-data-tools": "github:Sigureya/rpg-data-tools",
     "@sigureya/rpgtypes": "github:Sigureya/RpgTypes"
   }
