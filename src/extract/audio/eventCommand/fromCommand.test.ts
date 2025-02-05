@@ -1,8 +1,8 @@
 import * as RPG from "@sigureya/rpgtypes";
 import { describe, expect, test } from "vitest";
-import { audioPathFromCommands, isAudioCommand } from "./fromCommand";
+import { audioPathFromCommands } from "./fromCommand";
 import {
-  mockChangeVehicleME,
+  mockChangeVehicleBGM,
   mockCommonEvent,
   mockControlSwitches,
 } from "./mockCommands";
@@ -15,7 +15,7 @@ import {
   MockPlayME,
   MockPlaySE,
 } from "@sigureya/rmmzmock";
-import { createAudioCommand } from "@sigureya/rpg-data-tools";
+import { createAudioCommand, isAudioCommand } from "@sigureya/rpg-data-tools";
 import type { AudioResourcePath } from "./types";
 describe("isAudioCommand truthy", () => {
   test("Play BGM", () => {
@@ -40,7 +40,7 @@ describe("isAudioCommand truthy", () => {
     expect(isAudioCommand(MockChangeDefeatME)).toBeTruthy();
   });
   test("Change Vehicle ME", () => {
-    expect(isAudioCommand(mockChangeVehicleME)).toBeTruthy();
+    expect(isAudioCommand(mockChangeVehicleBGM)).toBeTruthy();
   });
 });
 describe("isAudioCommand falsy", () => {
@@ -94,11 +94,11 @@ describe("audioPathFromCommands", () => {
   test("Change Battle BGM", () => {
     const changeBattleBGM: RPG.Command_ChangeBattleBGM = createAudioCommand(
       RPG.CHANGE_BATTLE_BGM,
-      "test"
+      "battleBGM"
     );
     const expected: AudioResourcePath = {
       folder: RPG.FOLDER_AUDIO_BGM,
-      fileName: "test",
+      fileName: "battleBGM",
     };
     expect(audioPathFromCommands(changeBattleBGM)).toEqual(expected);
   });

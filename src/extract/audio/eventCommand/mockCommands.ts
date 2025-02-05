@@ -48,8 +48,8 @@ export const mockChangeDefeatME: RPG.Command_ChangeDefeatME = {
   indent: 0,
 };
 
-export const mockChangeVehicleME: RPG.Command_ChangeVehicleME = {
-  code: RPG.CHANGE_VEHICLE_ME,
+export const mockChangeVehicleBGM: RPG.Command_ChangeVehicleBGM = {
+  code: RPG.CHANGE_VEHICLE_BGM,
   parameters: [mockAudio],
   indent: 0,
 };
