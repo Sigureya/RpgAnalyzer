@@ -1,10 +1,10 @@
 import { describe, expect, test } from "vitest";
-import { extractImagesFromCommands } from "./fromEventCommands";
+import { extractImagesFromCommandList } from "./fromEventCommands";
 import * as RpgTypes from "@sigureya/rpgtypes";
 import type { ImageCommand } from "./types";
 
 const expectFlat = (commands: RpgTypes.EventCommand[]) => {
-  return extractImagesFromCommands(commands).flat();
+  return extractImagesFromCommandList(commands).flat();
 };
 
 describe("extractImagesFromCommands", () => {

@@ -1,5 +1,6 @@
 import type {
   Data_Map,
+  Data_NamedItem,
   EventCommand,
   MapEventContainer,
   MapEventPage,
@@ -12,5 +13,5 @@ export type ImageExtractableMap = Pick<
 > &
   MapEventContainer<
     EventCommand,
-    { id: number; pages: ImageExtractableEventPage }
+    Data_NamedItem & { pages: ImageExtractableEventPage }
   >;

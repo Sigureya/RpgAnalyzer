@@ -1,4 +1,4 @@
 export * from "./types";
-export * from "./extract";
+export * from "./correctCommands";
 export * from "./eventCommand";
 export * from "./system";
