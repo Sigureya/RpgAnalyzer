@@ -12,7 +12,7 @@ import type {
 } from "@sigureya/rpgtypes";
 import type { ImageCommand, ImageCommandInfo } from "./eventCommand/";
 import { extractImagesFromCommandList } from "./eventCommand/";
-import type { ImageExtractableMap } from "./types";
+import type { ExtractedMapImages, ImageExtractableMap } from "./types";
 
 export const extractImagesFromTroop = (troops: ReadonlyArray<Data_Troop>) => {
   return processTroopEvents(troops, collectImageCommands).flat(2);
@@ -26,8 +26,22 @@ export const extractImagesFromCommonEvents = (
 
 export const extractTextFromMap = (
   map: ImageExtractableMap
-): ImageCommandInfo[] => {
-  return collectMapEvents(map, collectImageCommands);
+): ExtractedMapImages => {
+  return {
+    commands: collectMapEvents(map, collectImageCommands),
+    background1: {
+      folderName: "battlebacks1",
+      fileName: map.battleback1Name,
+    },
+    background2: {
+      folderName: "battlebacks2",
+      fileName: map.battleback2Name,
+    },
+    parallax: {
+      folderName: "parallaxes",
+      fileName: map.parallaxName,
+    },
+  };
 };
 
 export const collectImageCommands = (

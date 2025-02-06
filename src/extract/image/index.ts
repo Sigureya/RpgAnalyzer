@@ -1,4 +1,3 @@
-export * from "./eventCommand";
 export * from "./mainData/";
-export * from "./system";
-export * from "./collectCommand";
+export * from "./system/";
+export * from "./map/";
