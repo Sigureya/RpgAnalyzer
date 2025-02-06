@@ -1,10 +1,5 @@
 import type { CommandParameter } from "@sigureya/rpg-data-tools";
-import type {
-  Data_NamedItem,
-  EventCommand,
-  ImageFolders,
-  MapEventContainer,
-} from "@sigureya/rpgtypes";
+import type { ImageFolders } from "@sigureya/rpgtypes";
 
 export interface ImageCommand {
   folderName: ImageFolders;
