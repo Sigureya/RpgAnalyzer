@@ -7,7 +7,7 @@ import {
 import { describe, expect, test } from "vitest";
 import { extractAudioFromMap } from "./extract";
 import type { AudioCommandInfo } from "./eventCommand";
-import { mockPlayBGM, mockCommonEvent } from "./eventCommand/mockCommands";
+import { mockCommonEvent } from "./eventCommand/mockCommands";
 import { createAudioCommand } from "@sigureya/rpg-data-tools";
 
 const mockMap: Map_Audios &
@@ -34,7 +34,7 @@ describe("extractAudioFromMap", () => {
     const result = extractAudioFromMap(mockMap);
     const expected: AudioCommandInfo[] = [
       {
-        code: mockPlayBGM.code,
+        code: PLAY_BGM,
         eventId: 1,
         pageIndex: 0,
         path: {
