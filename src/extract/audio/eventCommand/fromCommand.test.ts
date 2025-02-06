@@ -56,38 +56,44 @@ describe("audioPathFromCommands", () => {
   test("Play BGM", () => {
     const playBGM: RPG.Command_PlayBGM = createAudioCommand(
       RPG.PLAY_BGM,
-      "test"
+      "PlayBGM"
     );
     const expected: AudioResourcePath = {
       folder: RPG.FOLDER_AUDIO_BGM,
-      fileName: "test",
+      fileName: "PlayBGM",
     };
     expect(audioPathFromCommands(playBGM)).toEqual(expected);
   });
   test("Play BGS", () => {
     const playBGS: RPG.Command_PlayBGS = createAudioCommand(
       RPG.PLAY_BGS,
-      "test"
+      "playBGS"
     );
     const expected: AudioResourcePath = {
       folder: RPG.FOLDER_AUDIO_BGS,
-      fileName: "test",
+      fileName: "playBGS",
     };
     expect(audioPathFromCommands(playBGS)).toEqual(expected);
   });
   test("Play ME", () => {
-    const playME: RPG.Command_PlayME = createAudioCommand(RPG.PLAY_ME, "test");
+    const playME: RPG.Command_PlayME = createAudioCommand(
+      RPG.PLAY_ME,
+      "playME"
+    );
     const expected: AudioResourcePath = {
       folder: RPG.FOLDER_AUDIO_ME,
-      fileName: "test",
+      fileName: "playME",
     };
     expect(audioPathFromCommands(playME)).toEqual(expected);
   });
   test("Play SE", () => {
-    const playSE: RPG.Command_PlaySE = createAudioCommand(RPG.PLAY_SE, "test");
+    const playSE: RPG.Command_PlaySE = createAudioCommand(
+      RPG.PLAY_SE,
+      "PlaySE"
+    );
     const expected: AudioResourcePath = {
       folder: RPG.FOLDER_AUDIO_SE,
-      fileName: "test",
+      fileName: "PlaySE",
     };
     expect(audioPathFromCommands(playSE)).toEqual(expected);
   });
@@ -105,22 +111,22 @@ describe("audioPathFromCommands", () => {
   test("Change Victory ME", () => {
     const changeVictoryME: RPG.Command_ChangeVictoryME = createAudioCommand(
       RPG.CHANGE_VICTORY_ME,
-      "test"
+      "VictoryME"
     );
     const expected: AudioResourcePath = {
       folder: RPG.FOLDER_AUDIO_ME,
-      fileName: "test",
+      fileName: "VictoryME",
     };
     expect(audioPathFromCommands(changeVictoryME)).toEqual(expected);
   });
   test("Change Defeat ME", () => {
     const changeDefeatME: RPG.Command_ChangeDefeatME = createAudioCommand(
       RPG.CHANGE_DEFEAT_ME,
-      "test"
+      "DefeatME"
     );
     const expected: AudioResourcePath = {
       folder: RPG.FOLDER_AUDIO_ME,
-      fileName: "test",
+      fileName: "DefeatME",
     };
     expect(audioPathFromCommands(changeDefeatME)).toEqual(expected);
   });
