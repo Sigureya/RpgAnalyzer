@@ -10,7 +10,7 @@ import type {
   IndexOfCommandParameter,
 } from "@sigureya/rpgtypes";
 
-export const extractImagesFromCommands = (
+export const extractImagesFromCommandList = (
   commands: ReadonlyArray<EventCommand>
 ): ImageCommand[][] => {
   return mappingCommandList(commands, mappingTable);
