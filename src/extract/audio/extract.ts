@@ -1,5 +1,6 @@
 import {
   collectMapEvents,
+  isAudioCommand,
   processCommonEvents,
   processTroopEvents,
 } from "@sigureya/rpg-data-tools";
@@ -13,7 +14,7 @@ import type {
 } from "@sigureya/rpgtypes";
 import type { MapAudioList } from "./types";
 import type { AudioCommandInfo } from "./eventCommand";
-import { isAudioCommand, audioPathFromCommands } from "./eventCommand";
+import { audioPathFromCommands } from "./eventCommand";
 
 export const collectAudioCommands = (
   page: { list: EventCommand[] },

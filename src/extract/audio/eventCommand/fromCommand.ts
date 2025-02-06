@@ -17,23 +17,6 @@ export const isAudioResource = (path: {
   );
 };
 
-const CODE_LIST: ReadonlyArray<RpgTypes.EventCode> = [
-  RpgTypes.PLAY_BGM,
-  RpgTypes.PLAY_BGS,
-  RpgTypes.PLAY_ME,
-  RpgTypes.PLAY_SE,
-  RpgTypes.CHANGE_BATTLE_BGM,
-  RpgTypes.CHANGE_VICTORY_ME,
-  RpgTypes.CHANGE_DEFEAT_ME,
-  RpgTypes.CHANGE_VEHICLE_ME,
-];
-
-export const isAudioCommand = (
-  command: RpgTypes.EventCommand
-): command is ExtractCommandByParam<[AudioFileParams]> => {
-  return CODE_LIST.includes(command.code);
-};
-
 export const audioPathFromCommands = <
   T extends ExtractCommandByParam<[AudioFileParams]>
 >(
@@ -58,5 +41,5 @@ const FOLDER_NAME_TABLE = {
   [RpgTypes.CHANGE_BATTLE_BGM]: RpgTypes.FOLDER_AUDIO_BGM,
   [RpgTypes.CHANGE_VICTORY_ME]: RpgTypes.FOLDER_AUDIO_ME,
   [RpgTypes.CHANGE_DEFEAT_ME]: RpgTypes.FOLDER_AUDIO_ME,
-  [RpgTypes.CHANGE_VEHICLE_ME]: RpgTypes.FOLDER_AUDIO_ME,
+  [RpgTypes.CHANGE_VEHICLE_BGM]: RpgTypes.FOLDER_AUDIO_ME,
 } as const;

@@ -1,12 +1,14 @@
-import type {
-  EventCommand,
-  Map_Audios,
-  MapEventContainer,
+import {
+  PLAY_BGM,
+  type EventCommand,
+  type Map_Audios,
+  type MapEventContainer,
 } from "@sigureya/rpgtypes";
 import { describe, expect, test } from "vitest";
 import { extractAudioFromMap } from "./extract";
 import type { AudioCommandInfo } from "./eventCommand";
-import { mockPlayBGM, mockCommonEvent } from "./eventCommand/mockCommands";
+import { mockCommonEvent } from "./eventCommand/mockCommands";
+import { createAudioCommand } from "@sigureya/rpg-data-tools";
 
 const mockMap: Map_Audios &
   MapEventContainer<EventCommand, { id: number; name: string }> = {
@@ -20,7 +22,7 @@ const mockMap: Map_Audios &
       name: "event1",
       pages: [
         {
-          list: [mockPlayBGM, mockCommonEvent],
+          list: [createAudioCommand(PLAY_BGM, "playBGM"), mockCommonEvent],
         },
       ],
     },
@@ -32,12 +34,12 @@ describe("extractAudioFromMap", () => {
     const result = extractAudioFromMap(mockMap);
     const expected: AudioCommandInfo[] = [
       {
-        code: mockPlayBGM.code,
+        code: PLAY_BGM,
         eventId: 1,
         pageIndex: 0,
         path: {
           folder: "bgm",
-          fileName: mockPlayBGM.parameters[0].name,
+          fileName: "playBGM",
         },
       },
     ];

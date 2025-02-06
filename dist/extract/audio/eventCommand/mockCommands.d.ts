@@ -1,12 +1,5 @@
 import * as RPG from "@sigureya/rpgtypes";
 export declare const mockAudio: Readonly<RPG.AudioFileParams>;
-export declare const mockPlayBGM: RPG.Command_PlayBGM;
-export declare const mockPlayBGS: RPG.Command_PlayBGS;
-export declare const mockPlayME: RPG.Command_PlayME;
-export declare const mockPlaySE: RPG.Command_PlaySE;
-export declare const mockChangeBattleBGM: RPG.Command_ChangeBattleBGM;
-export declare const mockChangeVictoryME: RPG.Command_ChangeVictoryME;
-export declare const mockChangeDefeatME: RPG.Command_ChangeDefeatME;
-export declare const mockChangeVehicleME: RPG.Command_ChangeVehicleME;
+export declare const mockChangeVehicleBGM: RPG.Command_ChangeVehicleBGM;
 export declare const mockCommonEvent: RPG.Command_CommonEvent;
 export declare const mockControlSwitches: RPG.Command_ControlSwitches;
