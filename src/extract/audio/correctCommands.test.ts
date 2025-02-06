@@ -5,7 +5,7 @@ import {
   type MapEventContainer,
 } from "@sigureya/rpgtypes";
 import { describe, expect, test } from "vitest";
-import { extractAudioFromMap } from "./extract";
+import { extractAudioFromMap } from "./correctCommands";
 import type { AudioCommandInfo } from "./eventCommand";
 import { mockCommonEvent } from "./eventCommand/mockCommands";
 import { createAudioCommand } from "@sigureya/rpg-data-tools";
