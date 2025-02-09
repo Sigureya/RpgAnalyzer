@@ -10,7 +10,7 @@ export type VariableDesignation<
   Index extends RpgTypes.IndexOfCommandParameter<T, 0 | 1>
 > = T & { parameters: { [K in Index]: 1 } };
 
-export type VariableDesignationCommands =
+export type VariableDesignationCommand =
   | VariableDesignation_ChangeEnemyHP
   | VariableDesignation_ChangeEnemyMP
   | VariableDesignation_TransferPlayer

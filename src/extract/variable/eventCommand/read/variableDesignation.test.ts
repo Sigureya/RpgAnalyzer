@@ -14,7 +14,7 @@ type ExpectedReference = Omit<VariableReference, "index">;
 
 const testVariableDesignationCommand = (
   testName: string,
-  command: VDTypes.VariableDesignationCommands,
+  command: VDTypes.VariableDesignationCommand,
   expected: ExpectedReference[]
 ) => {
   describe(`${testName} (code: ${command.code})`, () => {
@@ -180,7 +180,7 @@ describe("Variable Designation Command:Invalid cases", () => {
     expect(isVariableDesignationCommand(command)).toBe(false);
     // 万が一、不正なデータが混入した際に例外を投げることができるか？
     expect(() =>
-      variableReference(command as VDTypes.VariableDesignationCommands)
+      variableReference(command as VDTypes.VariableDesignationCommand)
     ).toThrow();
   });
 });
