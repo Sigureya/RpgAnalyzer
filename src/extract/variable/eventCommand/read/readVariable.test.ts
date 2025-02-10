@@ -1,27 +1,27 @@
 import { describe, expect, test } from "vitest";
 import {
-  isVariableDesignationCommand,
-  variableReference,
-} from "./variableDesignation";
+  isVariableReadCommand,
+  extractVariableReference,
+} from "./readVariabler";
 import * as RpgTypes from "@sigureya/rpgtypes";
 import * as RpgMock from "@sigureya/rmmzmock";
 import type { EventCommand } from "@sigureya/rpgtypes";
 
-import type * as VDTypes from "./types/";
-import type { VariableReference } from "./types/";
+import type * as VDTypes from "./types";
+import type { VariableReference } from "./types";
 
 type ExpectedReference = Omit<VariableReference, "index">;
 
 const testVariableDesignationCommand = (
   testName: string,
-  command: VDTypes.VariableDesignationCommands,
+  command: VDTypes.VariableDesignationCommand,
   expected: ExpectedReference[]
 ) => {
   describe(`${testName} (code: ${command.code})`, () => {
     test("should identify command as a variable designation", () => {
-      expect(isVariableDesignationCommand(command)).toBe(true);
+      expect(isVariableReadCommand(command)).toBe(true);
     });
-    const reuslt: VariableReference[] = variableReference(command);
+    const reuslt: VariableReference[] = extractVariableReference(command);
     test("should extract correct variable reference", () => {
       expect(reuslt).not.toEqual([]);
       expect(reuslt).toMatchObject(expected);
@@ -45,7 +45,7 @@ describe("Variable Designation Command Tests:Valid cases", () => {
         parameters: [0, 0, 0, 0, 0],
         indent: 0,
       };
-      expect(isVariableDesignationCommand(direct)).toBe(false);
+      expect(isVariableReadCommand(direct)).toBe(false);
     });
 
     const variable: VDTypes.VariableDesignation_ChangeEnemyHP = {
@@ -67,7 +67,7 @@ describe("Variable Designation Command Tests:Valid cases", () => {
         parameters: [0, 0, 0, 0, 0],
         indent: 0,
       };
-      expect(isVariableDesignationCommand(direct)).toBe(false);
+      expect(isVariableReadCommand(direct)).toBe(false);
     });
     const variable: VDTypes.VariableDesignation_ChangeEnemyMP = {
       code: RpgTypes.CHANGE_ENEMY_MP,
@@ -88,7 +88,7 @@ describe("Variable Designation Command Tests:Valid cases", () => {
         parameters: [0, 0, 0, 0, 4, 0],
         indent: 0,
       };
-      expect(isVariableDesignationCommand(direct)).toBe(false);
+      expect(isVariableReadCommand(direct)).toBe(false);
     });
 
     const variable: VDTypes.VariableDesignation_TransferPlayer = {
@@ -118,7 +118,7 @@ describe("Variable Designation Command Tests:Valid cases", () => {
         parameters: [0, 0, 0, 0, 0],
         indent: 0,
       };
-      expect(isVariableDesignationCommand(direct)).toBe(false);
+      expect(isVariableReadCommand(direct)).toBe(false);
     });
 
     const variable: VDTypes.VariableDesignation_SetVehicleLocation = {
@@ -177,10 +177,10 @@ describe("Variable Designation Command:Invalid cases", () => {
   ];
 
   test.each(list)(`code: $code - should return false`, (command) => {
-    expect(isVariableDesignationCommand(command)).toBe(false);
+    expect(isVariableReadCommand(command)).toBe(false);
     // 万が一、不正なデータが混入した際に例外を投げることができるか？
     expect(() =>
-      variableReference(command as VDTypes.VariableDesignationCommands)
+      extractVariableReference(command as VDTypes.VariableDesignationCommand)
     ).toThrow();
   });
 });

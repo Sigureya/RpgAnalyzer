@@ -1,2 +1,2 @@
-export * from "./variableDesignation";
+export * from "./readVariabler";
 export * from "./types/";
