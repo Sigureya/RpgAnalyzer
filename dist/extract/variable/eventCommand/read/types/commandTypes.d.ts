@@ -17,7 +17,7 @@ export type VariableDesignation<T extends {
         [K in Index]: 1;
     };
 };
-export type VariableDesignationCommands = VariableDesignation_ChangeEnemyHP | VariableDesignation_ChangeEnemyMP | VariableDesignation_TransferPlayer | VariableDesignation_SetVehicleLocation | VariableDesignation_GetLocationInfo | VariableDesignation_BattleProcessing;
+export type VariableDesignationCommand = VariableDesignation_ChangeEnemyHP | VariableDesignation_ChangeEnemyMP | VariableDesignation_TransferPlayer | VariableDesignation_SetVehicleLocation | VariableDesignation_GetLocationInfo | VariableDesignation_BattleProcessing;
 export type VariableDesignation_ChangeEnemyHP = VariableDesignation<RpgTypes.Command_ChangeEnemyHP, 2>;
 export type VariableDesignation_ChangeEnemyMP = VariableDesignation<RpgTypes.Command_ChangeEnemyMP, 2>;
 export type VariableDesignation_TransferPlayer = VariableDesignation<RpgTypes.Command_TransferPlayer, 0>;
