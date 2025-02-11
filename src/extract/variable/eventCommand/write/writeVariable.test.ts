@@ -3,22 +3,21 @@ import type { Command_VariableWrite } from "./types";
 import {
   isVariableWriteCommand,
   extractVariableWritsFromEventCommand,
-  extractVariableWritsFromControlVariable,
 } from "./writeVariable";
 import type {
-  BranchParam_Variable,
   Command_GetLocationInfo,
   Command_SelectItem,
   Command_ControlVariables,
   Operand_Variable,
 } from "@sigureya/rpgtypes";
 import {
+  CONTROL_VARIABLES,
   GET_LOCATION_INFO,
   INPUT_NUMBER,
   SELECT_ITEM,
   type Command_InputNumber,
 } from "@sigureya/rpgtypes";
-const xxxText = <Command extends Command_VariableWrite>(
+const textExtract = <Command extends Command_VariableWrite>(
   testName: string,
   command: Command,
   expected: number[]
@@ -36,7 +35,7 @@ const xxxText = <Command extends Command_VariableWrite>(
 };
 
 describe("Variable Write Command Tests:Valid cases", () => {
-  xxxText<Command_InputNumber>(
+  textExtract<Command_InputNumber>(
     "Input Number",
     {
       code: INPUT_NUMBER,
@@ -45,20 +44,20 @@ describe("Variable Write Command Tests:Valid cases", () => {
     },
     [201]
   );
-  xxxText<Command_SelectItem>(
+  textExtract<Command_SelectItem>(
     "Select Item",
     { code: SELECT_ITEM, parameters: [351, 1], indent: 0 },
     [351]
   );
-  xxxText<Command_GetLocationInfo>(
+  textExtract<Command_GetLocationInfo>(
     "Get Location Info",
     { code: GET_LOCATION_INFO, parameters: [183, 0, 0, 0, 0], indent: 0 },
     [183]
   );
-  xxxText<Command_ControlVariables<Operand_Variable>>(
+  textExtract<Command_ControlVariables<Operand_Variable>>(
     "Control Variables",
     {
-      code: 122,
+      code: CONTROL_VARIABLES,
       parameters: [209, 211, 0, 1, 1],
       indent: 0,
     },
