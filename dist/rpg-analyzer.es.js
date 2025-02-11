@@ -1,62 +1,62 @@
-const p = "bgm", w = "se", d = "me", I = "bgs", E = (e, t) => t ? e === t.code : !1, W = "MessageHeader invalid command", R = "Invalid Head", C = (e) => typeof e[0] == "string" && e.length === 1, h = (e, t, r) => {
+const E = "bgm", T = "se", i = "me", w = "bgs", p = (e, t) => t ? e === t.code : !1, W = "MessageHeader invalid command", D = "Invalid Head", F = (e) => typeof e[0] == "string" && e.length === 1, u = (e, t, r) => {
   const a = [];
   for (let s = r; s < t.length; s++) {
-    const i = t[s];
-    if (E(e, i) && C(i.parameters))
+    const m = t[s];
+    if (p(e, m) && F(m.parameters))
       a.push({
         code: e,
-        indent: i.indent,
-        parameters: [i.parameters[0]]
+        indent: m.indent,
+        parameters: [m.parameters[0]]
       });
     else
       break;
   }
   return a;
-}, N = (e, t, r) => {
+}, A = (e, t, r) => {
   const a = e[t];
-  if (a && E(r, a) && C(a.parameters))
+  if (a && p(r, a) && F(a.parameters))
     return {
       code: r,
       indent: a.indent,
       parameters: [a.parameters[0]]
     };
-  throw new Error(R, { cause: a });
-}, z = (e, t) => ({
-  head: N(e, t, 108),
-  bodys: h(408, e, t + 1)
-}), V = (e, t) => ({
-  head: N(e, t, 355),
-  bodys: h(655, e, t + 1)
-}), D = (e, t) => {
+  throw new Error(D, { cause: a });
+}, O = (e, t) => ({
+  head: A(e, t, 108),
+  bodys: u(408, e, t + 1)
+}), z = (e, t) => ({
+  head: A(e, t, 355),
+  bodys: u(655, e, t + 1)
+}), H = (e, t) => {
   const r = e[t];
-  if (r && O(r))
+  if (r && J(r))
     return r;
   throw new Error(W, { cause: r });
-}, O = (e) => !e || e.code !== 101 || ![4, 5].includes(e.parameters.length) ? !1 : typeof e.parameters[0] == "string" && typeof e.parameters[1] == "number" && typeof e.parameters[2] == "number" && typeof e.parameters[3] == "number", H = (e, t) => ({
-  head: D(e, t),
-  bodys: h(401, e, t + 1)
-}), J = "ScrollTextHeader invalid command", Y = (e, t) => {
+}, J = (e) => !e || e.code !== 101 || ![4, 5].includes(e.parameters.length) ? !1 : typeof e.parameters[0] == "string" && typeof e.parameters[1] == "number" && typeof e.parameters[2] == "number" && typeof e.parameters[3] == "number", Y = (e, t) => ({
+  head: H(e, t),
+  bodys: u(401, e, t + 1)
+}), j = "ScrollTextHeader invalid command", q = (e, t) => {
   const r = e[t];
-  if (E(105, r))
+  if (p(105, r))
     return r;
   const a = {
     headCode: 105,
     bodyCode: 405,
     index: t
   };
-  throw new Error(J, { cause: a });
-}, j = (e, t) => ({
-  head: Y(e, t),
-  bodys: h(405, e, t + 1)
-}), q = (e, t = `
+  throw new Error(j, { cause: a });
+}, K = (e, t) => ({
+  head: q(e, t),
+  bodys: u(405, e, t + 1)
+}), Q = (e, t = `
 `) => e.map((r) => r.parameters[0]).join(t);
-class F {
+class M {
   constructor(t, r) {
     this.header = t, this.bodies = r;
   }
   getBodyText(t = `
 `) {
-    return q(this.getExpandedBodies(), t);
+    return Q(this.getExpandedBodies(), t);
   }
   jopinHedderAndBody() {
     return [this.header, ...this.bodies];
@@ -65,7 +65,7 @@ class F {
     return this.getExpandedBodies();
   }
 }
-class x extends F {
+class x extends M {
   constructor(t, r, a) {
     super(r, a), this.bodyCode = t;
   }
@@ -89,7 +89,7 @@ class x extends F {
     };
   }
 }
-class v extends F {
+class S extends M {
   getExpandedBodies() {
     return [this.header, ...this.bodies];
   }
@@ -104,35 +104,35 @@ class v extends F {
     return [this.mergedBody()];
   }
 }
-const K = "選択肢ヘルプ", Q = (e) => e.parameters[0] === K, U = (e, t = []) => new x(401, e, t), X = (e, t = []) => new x(405, e, t), Z = (e, t = []) => Q(e) ? new x(
+const X = "選択肢ヘルプ", U = (e) => e.parameters[0] === X, Z = (e, t = []) => new x(401, e, t), $ = (e, t = []) => new x(405, e, t), ee = (e, t = []) => U(e) ? new x(
   408,
   e,
   t
-) : new v(
+) : new S(
   e,
   t
-), $ = (e, t = []) => new v(e, t), ee = (e, t, r) => {
-  const a = H(e, t), s = U(a.head, a.bodys);
-  return r(s);
-}, re = (e, t, r) => {
-  const a = j(e, t), s = X(a.head, a.bodys);
-  return r(s);
-}, te = (e, t, r) => {
-  const a = z(e, t), s = Z(a.head, a.bodys);
+), re = (e, t = []) => new S(e, t), te = (e, t, r) => {
+  const a = Y(e, t), s = Z(a.head, a.bodys);
   return r(s);
 }, ae = (e, t, r) => {
-  const a = V(e, t), s = $(a.head, a.bodys);
+  const a = K(e, t), s = $(a.head, a.bodys);
   return r(s);
-}, o = (e, t, r, a, s) => a ? a(e, t, r) : s(e, t, r), f = (e, t) => e.map((r, a) => oe(e, a, t)), oe = (e, t, r) => {
+}, oe = (e, t, r) => {
+  const a = O(e, t), s = ee(a.head, a.bodys);
+  return r(s);
+}, se = (e, t, r) => {
+  const a = z(e, t), s = re(a.head, a.bodys);
+  return r(s);
+}, o = (e, t, r, a, s) => a ? a(e, t, r) : s(e, t, r), f = (e, t) => e.map((r, a) => ce(e, a, t)), ce = (e, t, r) => {
   const a = e[t];
   switch (a.code) {
     // メッセージ関連
     case 101:
-      return r.showMessage ? ee(e, t, r.showMessage) : r.other(a, t, e);
+      return r.showMessage ? te(e, t, r.showMessage) : r.other(a, t, e);
     case 401:
       return o(a, t, e, r.showMessageBody, r.other);
     case 105:
-      return r.showScrollingText ? re(e, t, r.showScrollingText) : r.other(a, t, e);
+      return r.showScrollingText ? ae(e, t, r.showScrollingText) : r.other(a, t, e);
     case 405:
       return o(a, t, e, r.showScrollingTextBody, r.other);
     case 102:
@@ -141,11 +141,11 @@ const K = "選択肢ヘルプ", Q = (e) => e.parameters[0] === K, U = (e, t = []
       return o(a, t, e, r.choiceWhen, r.other);
     // コメント・スクリプト関連
     case 108:
-      return r.comment ? te(e, t, r.comment) : r.other(a, t, e);
+      return r.comment ? oe(e, t, r.comment) : r.other(a, t, e);
     case 408:
       return o(a, t, e, r.commentBody, r.other);
     case 355:
-      return r.script ? ae(e, t, r.script) : r.other(a, t, e);
+      return r.script ? se(e, t, r.script) : r.other(a, t, e);
     case 655:
       return o(a, t, e, r.scriptBody, r.other);
     // 条件・制御系
@@ -254,7 +254,7 @@ const K = "選択肢ヘルプ", Q = (e) => e.parameters[0] === K, U = (e, t = []
     default:
       return r.other(a, t, e);
   }
-}, se = {
+}, ne = {
   // body部分は空の要素で置き換える
   commentBody: () => [],
   showMessageBody: () => [],
@@ -266,9 +266,9 @@ const K = "選択肢ヘルプ", Q = (e) => e.parameters[0] === K, U = (e, t = []
   comment: (e) => e.normalizedCommands(),
   script: (e) => e.normalizedCommands(),
   other: (e) => [e]
-}, ce = (e) => f(e, se), ne = (e) => !!e, b = (e, t) => e.pages.map(
+}, de = (e) => f(e, ne), ie = (e) => !!e, b = (e, t) => e.pages.map(
   (r, a) => t(r, a, e)
-), me = (e, t) => e.events.filter(ne).map((r) => b(r, t)), M = (e, t) => me(e, t).flat(2), S = (e, t) => e.map((r) => b(r, t)), A = (e, t) => e.map((r) => t(r, 0, r)), P = (e, t) => t.includes(e.code), de = (e) => P(e, ie), ie = [
+), V = (e, t) => e.events.filter(ie).map((r) => b(r, t)), _ = (e, t) => V(e, t).flat(2), I = (e, t) => e.map((r) => b(r, t)), C = (e, t) => e.map((r) => t(r, 0, r)), P = (e, t) => t.includes(e.code), me = (e) => P(e, ue), ue = [
   241,
   245,
   249,
@@ -277,7 +277,7 @@ const K = "選択肢ヘルプ", Q = (e) => e.parameters[0] === K, U = (e, t = []
   133,
   139,
   140
-], he = (e) => P(e, ue), ue = [
+], he = (e) => P(e, le), le = [
   231,
   322,
   323,
@@ -287,73 +287,73 @@ const K = "選択肢ヘルプ", Q = (e) => e.parameters[0] === K, U = (e, t = []
   code: e.code,
   paramIndex: t,
   value: e.parameters[t]
-}), le = () => /<([^<>:]+):([^>]*)>/g, ge = (e, t) => {
-  const r = le(), a = [];
+}), ge = () => /<([^<>:]+):([^>]*)>/g, Ee = (e, t) => {
+  const r = ge(), a = [];
   let s;
   for (; (s = r.exec(e)) !== null; )
     a.push(t(s[1], s[2]));
   return a;
-}, pe = (e, t, r) => t.map((a) => r(a, e[a], e)), Ee = (e, t, r) => pe(e, t, r), ve = (e) => e.folder === w || e.folder === p || e.folder === I || e.folder === d, xe = (e) => ({
-  folder: fe(e) || "",
+}, pe = (e, t, r) => t.map((a) => r(a, e[a], e)), xe = (e, t, r) => pe(e, t, r), Le = (e) => e.folder === T || e.folder === E || e.folder === w || e.folder === i, fe = (e) => ({
+  folder: be(e) || "",
   fileName: e.parameters[0].name
-}), fe = (e) => be[e.code], be = {
-  241: p,
-  245: I,
-  249: d,
-  250: w,
-  132: p,
-  133: d,
-  139: d,
-  140: d
-}, B = (e, t, r) => e.list.filter(de).map((a) => ({
+}), be = (e) => Ie[e.code], Ie = {
+  241: E,
+  245: w,
+  249: i,
+  250: T,
+  132: E,
+  133: i,
+  139: i,
+  140: i
+}, B = (e, t, r) => e.list.filter(me).map((a) => ({
   code: a.code,
-  path: xe(a),
+  path: fe(a),
   pageIndex: t,
   eventId: r.id
-})), Me = (e) => A(e, B).flat(2), Se = (e) => S(e, B).flat(2), Be = (e) => ({
+})), Ge = (e) => C(e, B).flat(2), We = (e) => I(e, B).flat(2), Ce = (e) => ({
   bgm: e.bgm,
   bgs: e.bgs,
-  commands: M(e, B)
-}), Ae = (e) => ({
-  map: Be(e.map),
+  commands: _(e, B)
+}), De = (e) => ({
+  map: Ce(e.map),
   filename: e.filename,
   editingName: e.editingName
-}), Pe = (e) => ({
-  sounds: u(e.sounds),
-  bgm: u([e.battleBgm, e.titleBgm]),
-  me: u([
+}), Oe = (e) => ({
+  sounds: h(e.sounds),
+  bgm: h([e.battleBgm, e.titleBgm]),
+  me: h([
     e.defeatMe,
     e.gameoverMe,
     e.victoryMe
   ])
-}), u = (e) => e.map((t, r) => ({
+}), h = (e) => e.map((t, r) => ({
   index: r,
   path: t.name
-})), _ = (e, t, r) => ({ key: e, text: t, id: r.id }), m = (e, t) => ({
-  main: Ee(e, t, (r, a) => _(r, a, e)),
+})), R = (e, t, r) => ({ key: e, text: t, id: r.id }), d = (e, t) => ({
+  main: xe(e, t, (r, a) => R(r, a, e)),
   note: k(e)
-}), k = (e) => ge(e.note, (t, r) => _(t, r, e)), _e = (e) => m(e, ["name", "nickname", "profile"]), ke = (e) => m(e, ["name"]), Ge = (e) => m(e, ["name"]), Le = (e) => m(e, [
+}), k = (e) => Ee(e.note, (t, r) => R(t, r, e)), ze = (e) => d(e, ["name", "nickname", "profile"]), He = (e) => d(e, ["name"]), Je = (e) => d(e, ["name"]), Ye = (e) => d(e, [
   "name",
   "description",
   "message1",
   "message2"
-]), We = (e) => m(e, ["name", "description"]), Re = (e) => m(e, ["name", "description"]), ze = (e) => m(e, ["name", "description"]), Ve = (e) => m(e, [
+]), je = (e) => d(e, ["name", "description"]), qe = (e) => d(e, ["name", "description"]), Ke = (e) => d(e, ["name", "description"]), Qe = (e) => d(e, [
   "name",
   "message1",
   "message2",
   "message3",
   "message4"
-]), G = (e) => {
-  const t = ce(e).flat();
-  return f(t, ye);
-}, L = (e) => b(
+]), L = (e) => {
+  const t = de(e).flat();
+  return f(t, Be);
+}, G = (e) => b(
   e,
-  (t) => G(t.list)
-), ye = {
+  (t) => L(t.list)
+), Be = {
   changeName: (e) => [n(e, 1)],
   changeNickname: (e) => [n(e, 1)],
   changeProfile: (e) => [n(e, 1)],
-  showChoices: (e) => we(e),
+  showChoices: (e) => ye(e),
   showScrollingText: (e) => [n(e.mergedBody(), 0)],
   showMessage: (e) => {
     const t = e.normalizedCommands(), r = n(t[0], 4), a = t[1];
@@ -366,30 +366,30 @@ const K = "選択肢ヘルプ", Q = (e) => e.parameters[0] === K, U = (e, t = []
     const t = e.mergedBody();
     return [n(t, 0)];
   },
-  script: (e) => Te(),
+  script: (e) => ve(),
   other: () => [],
   commentBody: () => []
-}, Te = (e) => [], we = (e) => e.parameters[0].map((t, r) => ({
+}, ve = (e) => [], ye = (e) => e.parameters[0].map((t, r) => ({
   code: e.code,
   paramIndex: r,
   value: t
-})), De = (e) => {
-  const t = L(e);
+})), Xe = (e) => {
+  const t = G(e);
   return {
     note: k(e),
     eventId: e.id,
     commands: t.flat(2)
   };
-}, Oe = (e) => {
-  const t = L(e);
+}, Ue = (e) => {
+  const t = G(e);
   return {
     troopId: e.id,
     commands: t.flat(2)
   };
-}, He = (e) => ({
+}, Ze = (e) => ({
   eventId: e.id,
-  commands: G(e.list).flat(2)
-}), Je = (e) => ({
+  commands: L(e.list).flat(2)
+}), $e = (e) => ({
   key: "battlerName",
   image: e.battlerName,
   id: e.id
@@ -398,7 +398,7 @@ const K = "選択肢ヘルプ", Q = (e) => e.parameters[0] === K, U = (e, t = []
   key: t,
   image: e[t],
   id: e.id
-}), Ye = (e) => [
+}), er = (e) => [
   l(e, "faceName", "faces"),
   l(e, "characterName", "characters"),
   l(e, "battlerName", "sv_actors")
@@ -406,20 +406,20 @@ const K = "選択肢ヘルプ", Q = (e) => e.parameters[0] === K, U = (e, t = []
   folder: "characters",
   key: t,
   image: e[t].characterName
-}), T = (e, t, r) => ({
+}), N = (e, t, r) => ({
   folder: r,
   key: t,
   image: e[t]
-}), je = (e) => [
-  T(e, "title1Name", "titles1"),
-  T(e, "title2Name", "titles2"),
+}), rr = (e) => [
+  N(e, "title1Name", "titles1"),
+  N(e, "title2Name", "titles2"),
   g(e, "boat"),
   g(e, "ship"),
   g(e, "airship")
-], Ie = (e) => f(e, Ce), c = (e, t, r) => ({
+], Ne = (e) => f(e, Te), c = (e, t, r) => ({
   folderName: r,
   command: n(e, t)
-}), Ce = {
+}), Te = {
   changeActorImages: (e) => [
     c(e, 1, "characters"),
     c(e, 3, "faces"),
@@ -433,8 +433,8 @@ const K = "選択肢ヘルプ", Q = (e) => e.parameters[0] === K, U = (e, t = []
   changeParallax: (e) => [c(e, 0, "parallaxes")],
   changeVehicleImage: (e) => [c(e, 1, "characters")],
   other: () => []
-}, qe = (e) => S(e, y).flat(2), Ke = (e) => A(e, y).flat(2), Qe = (e) => ({
-  commands: M(e, y),
+}, tr = (e) => I(e, v).flat(2), ar = (e) => C(e, v).flat(2), or = (e) => ({
+  commands: _(e, v),
   background1: {
     folderName: "battlebacks1",
     fileName: e.battleback1Name
@@ -447,49 +447,118 @@ const K = "選択肢ヘルプ", Q = (e) => e.parameters[0] === K, U = (e, t = []
     folderName: "parallaxes",
     fileName: e.parallaxName
   }
-}), y = (e, t, r) => Ie(
+}), v = (e, t, r) => Ne(
   e.list.filter(he)
-).flatMap((s) => Fe(s, t, r)), Ne = (e, t, r) => ({
+).flatMap((s) => Fe(s, t, r)), we = (e, t, r) => ({
   folderName: e.folderName,
   command: e.command,
   eventId: t.id,
   pageIndex: r,
   eventName: t.name
-}), Fe = (e, t, r) => e.map((a) => Ne(a, r, t));
+}), Fe = (e, t, r) => e.map((a) => we(a, r, t)), Ae = 1, Me = {
+  331: 2,
+  332: 2,
+  201: 0,
+  202: 1,
+  285: 2,
+  301: 0
+}, Se = {
+  331: [4],
+  332: [4],
+  201: [1, 2, 3],
+  202: [2, 3, 4],
+  285: [0],
+  301: [1]
+}, Ve = (e) => e.filter(Pe).flatMap(_e), _e = (e) => {
+  const t = Se[e.code];
+  if (t === void 0)
+    throw new Error(`code${e.code} is not supported`);
+  return t.map((r) => ({
+    eventCode: e.code,
+    index: r,
+    variableId: e.parameters[r]
+  }));
+}, Pe = (e) => {
+  const t = Me[e.code];
+  return t === void 0 ? !1 : e.parameters[t] === Ae;
+}, sr = (e) => e.code === 103 || e.code === 104 || e.code === 285 || e.code === 122, cr = (e) => e.code === 122 ? Re(e) : [
+  {
+    variableId: e.parameters[0],
+    code: e.code
+  }
+], Re = (e) => {
+  const t = e.parameters[0], r = e.parameters[1];
+  return Array.from({ length: r - t + 1 }, (a, s) => ({
+    variableId: s + t,
+    code: 122
+  }));
+}, y = (e, t, r) => {
+  const a = Ve(e.list);
+  return {
+    pageIndex: t,
+    eventId: r.id,
+    commands: a
+  };
+}, nr = (e) => V(e, (t, r, a) => ({
+  page: y(t, r, a),
+  conditions: ke(t.conditions)
+})).flat(2), ke = (e) => ({
+  variableId: e.variableId,
+  valid: e.variableValid,
+  value: e.variableValue
+}), dr = (e) => C(e, y), ir = (e) => I(e, y), mr = (e) => e.reduce((t, r) => {
+  if (r.code === 117) {
+    const a = r.parameters[0];
+    t[a] = (t[a] || 0) + 1;
+  }
+  return t;
+}, {});
 export {
-  xe as audioPathFromCommands,
+  fe as audioPathFromCommands,
   B as collectAudioCommands,
-  y as collectImageCommands,
-  we as commandChoice,
-  De as correctMapEventText,
-  Se as expectAudioFromTroop,
-  Me as extractAudioCFromCommonEvents,
-  Be as extractAudioFromMap,
-  Ae as extractAudioFromMapFileInfo,
-  Ye as extractImageFromActor,
-  Je as extractImageFromEnemy,
-  je as extractImageFromSystem,
-  Ie as extractImagesFromCommandList,
-  Ke as extractImagesFromCommonEvents,
-  qe as extractImagesFromTroop,
+  v as collectImageCommands,
+  y as collectVariableReadCommand,
+  ye as commandChoice,
+  Xe as correctMapEventText,
+  We as expectAudioFromTroop,
+  Ge as extractAudioCFromCommonEvents,
+  Ce as extractAudioFromMap,
+  De as extractAudioFromMapFileInfo,
+  mr as extractCommonEventCalls,
+  er as extractImageFromActor,
+  $e as extractImageFromEnemy,
+  rr as extractImageFromSystem,
+  Ne as extractImagesFromCommandList,
+  ar as extractImagesFromCommonEvents,
+  tr as extractImagesFromTroop,
   k as extractNoteText,
-  m as extractTextData,
-  _e as extractTextFromActor,
-  ze as extractTextFromArmor,
-  Ge as extractTextFromClass,
-  He as extractTextFromCommonEvent,
-  ke as extractTextFromEnemy,
-  G as extractTextFromEventCommands,
-  L as extractTextFromEventPages,
-  We as extractTextFromItem,
-  Qe as extractTextFromMap,
-  Le as extractTextFromSkill,
-  Ve as extractTextFromState,
-  Oe as extractTextFromTroop,
-  Re as extractTextFromWeapon,
-  ye as extractTextMapper,
-  ve as isAudioResource,
-  Te as readScript,
-  Pe as systemAudioFiles
+  ke as extractPageCondition,
+  d as extractTextData,
+  ze as extractTextFromActor,
+  Ke as extractTextFromArmor,
+  Je as extractTextFromClass,
+  Ze as extractTextFromCommonEvent,
+  He as extractTextFromEnemy,
+  L as extractTextFromEventCommands,
+  G as extractTextFromEventPages,
+  je as extractTextFromItem,
+  or as extractTextFromMap,
+  Ye as extractTextFromSkill,
+  Qe as extractTextFromState,
+  Ue as extractTextFromTroop,
+  qe as extractTextFromWeapon,
+  Be as extractTextMapper,
+  Ve as extractVariableInfos,
+  dr as extractVariableReadingFromCommonEvent,
+  nr as extractVariableReadingFromMap,
+  ir as extractVariableReadingFromTroop,
+  _e as extractVariableReference,
+  Re as extractVariableWritsFromControlVariable,
+  cr as extractVariableWritsFromEventCommand,
+  Le as isAudioResource,
+  Pe as isVariableReadCommand,
+  sr as isVariableWriteCommand,
+  ve as readScript,
+  Oe as systemAudioFiles
 };
 //# sourceMappingURL=rpg-analyzer.es.js.map
