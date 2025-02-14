@@ -2,22 +2,18 @@ import type {
   Data_CommonEvent,
   Data_Troop,
   EventCommand,
-  MapEvent_PageCondition,
   MapEventContainer,
   MapEventPage,
 } from "@sigureya/rpgtypes";
 import type { VariableReference } from "./eventCommand";
-import { extractVariableInfos } from "./eventCommand";
-import type {
-  ExtractedMapEventPage,
-  ExtractedPageCondition,
-  ExtractedVariableCommands,
-} from "./types";
+import { extractVariableReadingInfos } from "./eventCommand";
+import type { ExtractedMapEventPage, ExtractedVariableCommands } from "./types";
 import {
   processCommonEvents,
   processMapEvents,
   processTroopEvents,
 } from "@sigureya/rpg-data-tools";
+import { extractPageCondition } from "./eventConditions";
 
 export const collectVariableReadCommand = <
   Page extends { list: EventCommand[] }
@@ -26,7 +22,7 @@ export const collectVariableReadCommand = <
   pageIndex: number,
   event: { id: number }
 ): ExtractedVariableCommands => {
-  const list: VariableReference[] = extractVariableInfos(page.list);
+  const list: VariableReference[] = extractVariableReadingInfos(page.list);
   return {
     pageIndex,
     eventId: event.id,
@@ -48,16 +44,6 @@ export const extractVariableReadingFromMap = (
     page: collectVariableReadCommand(page, pageIndex, event),
     conditions: extractPageCondition(page.conditions),
   })).flat(2);
-};
-
-export const extractPageCondition = (
-  condtion: MapEvent_PageCondition
-): ExtractedPageCondition => {
-  return {
-    variableId: condtion.variableId,
-    valid: condtion.variableValid,
-    value: condtion.variableValue,
-  };
 };
 
 export const extractVariableReadingFromCommonEvent = (
