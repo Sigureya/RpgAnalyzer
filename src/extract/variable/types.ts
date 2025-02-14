@@ -1,4 +1,5 @@
 import type { VariableReference } from "./eventCommand";
+import type { ExtractedPageCondition } from "./eventConditions";
 
 export interface ExtractedVariableCommands {
   pageIndex: number;
@@ -8,10 +9,4 @@ export interface ExtractedVariableCommands {
 export interface ExtractedMapEventPage {
   page: ExtractedVariableCommands;
   conditions: ExtractedPageCondition;
-}
-
-export interface ExtractedPageCondition {
-  variableId: number;
-  value: number;
-  valid: boolean;
 }
