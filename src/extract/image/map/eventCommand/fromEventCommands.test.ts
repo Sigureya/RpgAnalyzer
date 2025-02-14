@@ -4,7 +4,7 @@ import * as RpgTypes from "@sigureya/rpgtypes";
 import type { ImageCommand } from "./types";
 
 const expectFlat = (commands: RpgTypes.EventCommand[]) => {
-  return extractImagesFromCommandList(commands).flat();
+  return extractImagesFromCommandList(commands);
 };
 
 describe("extractImagesFromCommands", () => {
