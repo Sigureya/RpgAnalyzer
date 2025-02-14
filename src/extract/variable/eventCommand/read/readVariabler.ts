@@ -7,7 +7,7 @@ import {
   VARIABLEID_INDEX_TABLE,
 } from "./piravate";
 
-export const extractVariableInfos = (
+export const extractVariableReadingInfos = (
   commandList: ReadonlyArray<EventCommand>
 ): VariableReference[] => {
   return commandList
