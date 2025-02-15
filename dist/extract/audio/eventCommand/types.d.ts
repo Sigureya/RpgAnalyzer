@@ -6,6 +6,10 @@ export interface AudioResourcePath {
 export interface AudioCommandInfo {
     code: number;
     path: AudioResourcePath;
+}
+export interface AudioCommandInfoWithLocation {
+    code: number;
+    path: AudioResourcePath;
     eventId: number;
     pageIndex: number;
 }

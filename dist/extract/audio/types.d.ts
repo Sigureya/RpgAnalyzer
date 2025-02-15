@@ -1,12 +1,12 @@
 import { AudioFileParams, MapFileInfo } from '@sigureya/rpgtypes';
-import { AudioCommandInfo } from './eventCommand';
+import { AudioCommandInfoWithLocation } from './eventCommand';
 export interface MapAudioList {
-    commands: AudioCommandInfo[];
+    commands: AudioCommandInfoWithLocation[];
     bgm: AudioFileParams;
     bgs: AudioFileParams;
 }
 export interface AudioXXX {
     maps: MapFileInfo<MapAudioList>[];
-    commons: AudioCommandInfo[];
-    troops: AudioCommandInfo[];
+    commons: AudioCommandInfoWithLocation[];
+    troops: AudioCommandInfoWithLocation[];
 }
