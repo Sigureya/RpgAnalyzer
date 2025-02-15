@@ -5,11 +5,9 @@ import type {
   AudioCommandInfo,
   ImageCommand,
   ExtractedPageCondition,
+  ImageResourcePath,
 } from "./extract";
 
-export interface ExtractedMapEventPage {
-  commands: ExtractedCommandInfos;
-}
 export interface ExtractedCommandInfos {
   variableReading: VariableReference[];
   variableWriting: VariableReference[];
@@ -22,4 +20,11 @@ export interface ExtractedCommandInfos {
 export interface ExtractedMapEventPage {
   commands: ExtractedCommandInfos;
   condtion: ExtractedPageCondition;
+  image: ImageResourcePath;
+}
+
+export interface ExtractedMapEvent {
+  name: string;
+  eventId: number;
+  pages: ExtractedMapEventPage[];
 }

@@ -7,7 +7,7 @@ import type {
 } from "@sigureya/rpgtypes";
 import type { VariableReference } from "./eventCommand";
 import { extractVariableReadingInfos } from "./eventCommand";
-import type { ExtractedMapEventPage, ExtractedVariableCommands } from "./types";
+import type { ExtractedVariableCommands } from "./types";
 import {
   processCommonEvents,
   processMapEvents,
@@ -39,7 +39,7 @@ type EventType = {
 
 export const extractVariableReadingFromMap = (
   map: MapEventContainer<EventCommand, EventType>
-): ExtractedMapEventPage[] => {
+) => {
   return processMapEvents(map, (page, pageIndex, event) => ({
     page: collectVariableReadCommand(page, pageIndex, event),
     conditions: extractPageCondition(page.conditions),
