@@ -1,5 +1,5 @@
-import { Data_CommonEvent, Data_Troop, EventCommand, MapEvent_PageCondition, MapEventContainer, MapEventPage } from '@sigureya/rpgtypes';
-import { ExtractedMapEventPage, ExtractedPageCondition, ExtractedVariableCommands } from './types';
+import { Data_CommonEvent, Data_Troop, EventCommand, MapEventContainer, MapEventPage } from '@sigureya/rpgtypes';
+import { ExtractedVariableCommands } from './types';
 export declare const collectVariableReadCommand: <Page extends {
     list: EventCommand[];
 }>(page: Page, pageIndex: number, event: {
@@ -10,8 +10,10 @@ type EventType = {
     id: number;
     pages: EventPageType[];
 };
-export declare const extractVariableReadingFromMap: (map: MapEventContainer<EventCommand, EventType>) => ExtractedMapEventPage[];
-export declare const extractPageCondition: (condtion: MapEvent_PageCondition) => ExtractedPageCondition;
+export declare const extractVariableReadingFromMap: (map: MapEventContainer<EventCommand, EventType>) => {
+    page: ExtractedVariableCommands;
+    conditions: import('./eventConditions').ExtractedPageCondition;
+}[];
 export declare const extractVariableReadingFromCommonEvent: (event: ReadonlyArray<Data_CommonEvent>) => ExtractedVariableCommands[];
 export declare const extractVariableReadingFromTroop: (troops: ReadonlyArray<Data_Troop>) => ExtractedVariableCommands[][];
 export {};

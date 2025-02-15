@@ -13,3 +13,9 @@ export interface ImageCommandInfo {
   pageIndex: number;
   eventName: string;
 }
+
+export interface ExtractedImages {
+  eventId: number;
+  pageIndex: number;
+  commands: ImageCommand[];
+}

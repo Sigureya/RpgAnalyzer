@@ -1,4 +1,6 @@
 import {
+  flatMappingCommandList,
+  isImageCommand,
   mappingCommandList,
   pickCommandParamString,
   type MappingObject,
@@ -10,10 +12,19 @@ import type {
   IndexOfCommandParameter,
 } from "@sigureya/rpgtypes";
 
-export const extractImagesFromCommandList = (
+/**
+ * @deprecated
+ */
+export const extractImagesFromCommandListOld = (
   commands: ReadonlyArray<EventCommand>
 ): ImageCommand[][] => {
   return mappingCommandList(commands, mappingTable);
+};
+
+export const extractImagesFromCommandList = (
+  commands: ReadonlyArray<EventCommand>
+): ImageCommand[] => {
+  return flatMappingCommandList(commands.filter(isImageCommand), mappingTable);
 };
 
 const imageCommand = <

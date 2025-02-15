@@ -16,6 +16,12 @@ export const isAudioResource = (path: {
     path.folder === RpgTypes.FOLDER_AUDIO_ME
   );
 };
+export const audioCommandInfo = (
+  command: ExtractCommandByParam<[AudioFileParams]>
+) => ({
+  code: command.code,
+  path: audioPathFromCommands(command),
+});
 
 export const audioPathFromCommands = <
   T extends ExtractCommandByParam<[AudioFileParams]>
