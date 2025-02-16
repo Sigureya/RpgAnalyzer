@@ -13,7 +13,7 @@ describe("eventPageCharacterImage", () => {
         tileId: 0,
       },
     };
-    const result = eventPageCharacterImage(page);
+    const result = eventPageCharacterImage(page.image);
     expect(result).toEqual({
       folderName: "characters",
       fileName: "Actor1_1",
@@ -29,7 +29,7 @@ describe("eventPageCharacterImage", () => {
         tileId: 0,
       },
     };
-    const result = eventPageCharacterImage(page);
+    const result = eventPageCharacterImage(page.image);
     expect(result).toEqual({
       folderName: "characters",
       fileName: "",

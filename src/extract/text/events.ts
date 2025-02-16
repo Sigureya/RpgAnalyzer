@@ -5,13 +5,17 @@ import type {
   EventCommand,
   MapEvent,
 } from "@sigureya/rpgtypes";
-import type { ExtractedCommonEventText, ExtractedTroopText } from "./types";
+import type {
+  ExtractedCommonEventText,
+  ExtractedMapEventText,
+  ExtractedTroopText,
+} from "./types";
 import { extractNoteText } from "./mainData";
 import {
   extractTextFromEventCommands,
   extractTextFromEventPages,
 } from "./eventCommand";
-import type { ExtractedEventText } from "./eventCommand/types";
+import type { ExtractedEventText } from "./eventCommand/";
 
 export const correctTextCommands = (
   page: { list: EventCommand[] },
@@ -30,7 +34,7 @@ export const correctTextCommands = (
 
 export const correctMapEventText = (
   event: Pick<MapEvent, "note" | "pages" | "id">
-) => {
+): ExtractedMapEventText => {
   const commands: CommandParameter<string>[][][] =
     extractTextFromEventPages(event);
   return {

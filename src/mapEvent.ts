@@ -8,6 +8,7 @@ import {
   extractPageCondition,
   extractTextFromEventCommands,
   extractVariableReadingInfos,
+  extractVariableWriting,
 } from "./extract";
 import type {
   ExtractedCommandInfos,
@@ -40,7 +41,7 @@ export const extractEventCommandData = (
     calls: extractCommonEventCalls(list),
     audios: extractAudioCommandsInfo(list),
     variableReading: extractVariableReadingInfos(list),
-    variableWriting: [],
+    variableWriting: extractVariableWriting(list),
     images: extractImagesFromCommandList(list),
   };
 };
