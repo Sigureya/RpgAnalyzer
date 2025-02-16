@@ -3,19 +3,20 @@ import type { Command_VariableWrite } from "./types";
 import {
   isVariableWriteCommand,
   extractVariableWritsFromEventCommand,
+  extractVariableWriting,
 } from "./writeVariable";
 import type {
   Command_GetLocationInfo,
   Command_SelectItem,
   Command_ControlVariables,
   Operand_Variable,
+  Command_InputNumber,
 } from "@sigureya/rpgtypes";
 import {
   CONTROL_VARIABLES,
   GET_LOCATION_INFO,
   INPUT_NUMBER,
   SELECT_ITEM,
-  type Command_InputNumber,
 } from "@sigureya/rpgtypes";
 const textExtract = <Command extends Command_VariableWrite>(
   testName: string,
@@ -30,6 +31,11 @@ const textExtract = <Command extends Command_VariableWrite>(
     test("should extract correct variable reference", () => {
       expect(reuslt).not.toEqual([]);
       expect(reuslt.map((v) => v.variableId)).toEqual(expected);
+    });
+    test("", () => {
+      const result = extractVariableWriting([command]);
+      expect(result).not.toEqual([]);
+      expect(result.map((v) => v.variableId)).toEqual(expected);
     });
   });
 };

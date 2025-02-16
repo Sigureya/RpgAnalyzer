@@ -1,7 +1,20 @@
 import * as RpgTypes from "@sigureya/rpgtypes";
 import type { Command_VariableWrite, ExtractedVariableWrite } from "./types";
 
-export const isVariableWriteCommand = (command: RpgTypes.EventCommand) => {
+export const extractVariableWriting = (
+  list: ReadonlyArray<RpgTypes.EventCommand>
+): ExtractedVariableWrite[] => {
+  return list.flatMap((command) => {
+    if (isVariableWriteCommand(command)) {
+      return extractVariableWritsFromEventCommand(command);
+    }
+    return [];
+  });
+};
+
+export const isVariableWriteCommand = (
+  command: RpgTypes.EventCommand
+): command is Command_VariableWrite => {
   return (
     command.code === RpgTypes.INPUT_NUMBER ||
     command.code === RpgTypes.SELECT_ITEM ||
