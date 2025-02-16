@@ -6,7 +6,7 @@ import type {
   ImageResourcePath,
 } from "./types";
 import type { MapEvent_Image } from "@sigureya/rpgtypes";
-import { FOLDER_IMG_CHACTERS, type MapEventPage } from "@sigureya/rpgtypes";
+import { FOLDER_IMG_CHACTERS } from "@sigureya/rpgtypes";
 
 export const extractImageFromMap = (
   map: ImageExtractableMap
