@@ -1,16 +1,16 @@
 import type {
-  VariableReference,
+  VariableRead,
   AudioCommandInfo,
   ImageCommand,
   ExtractedPageCondition,
   ImageResourcePath,
-  ExtractedVariableWrite,
+  VariableWrite,
   TextCommandParameter,
 } from "./extract";
 
 export interface ExtractedCommandInfos {
-  variableReading: VariableReference[];
-  variableWriting: ExtractedVariableWrite[];
+  variableReading: VariableRead[];
+  variableWriting: VariableWrite[];
   calls: Record<number, number>;
   texts: TextCommandParameter[];
   audios: AudioCommandInfo[];
