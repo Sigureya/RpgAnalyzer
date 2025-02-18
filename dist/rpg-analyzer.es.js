@@ -268,7 +268,7 @@ const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r 
   other: (e) => [e]
 }, Ee = (e) => b(e, ge), pe = (e) => !!e, I = (e, r) => e.pages.map(
   (t, a) => r(t, a, e)
-), S = (e, r) => e.events.filter(pe).map((t) => I(t, r)), P = (e, r) => S(e, r).flat(2), V = (e, r) => e.map((t) => I(t, r)), _ = (e, r) => e.map((t) => r(t, 0, t)), R = (e, r) => r.includes(e.code), k = (e) => R(e, fe), fe = [
+), S = (e, r) => e.events.filter(pe).map((t) => I(t, r)), P = (e, r) => S(e, r).flat(2), _ = (e, r) => e.map((t) => I(t, r)), V = (e, r) => e.map((t) => r(t, 0, t)), R = (e, r) => r.includes(e.code), k = (e) => R(e, fe), fe = [
   241,
   245,
   249,
@@ -278,6 +278,7 @@ const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r 
   139,
   140
 ], L = (e) => R(e, xe), xe = [
+  101,
   231,
   322,
   323,
@@ -313,7 +314,7 @@ const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r 
   path: W(a),
   pageIndex: r,
   eventId: t.id
-})), Te = (e) => e.filter(k).map(Be), Xe = (e) => _(e, C).flat(2), Ue = (e) => V(e, C).flat(2), we = (e) => ({
+})), Te = (e) => e.filter(k).map(Be), Xe = (e) => V(e, C).flat(2), Ue = (e) => _(e, C).flat(2), we = (e) => ({
   bgm: e.bgm,
   bgs: e.bgs,
   commands: P(e, C)
@@ -432,6 +433,7 @@ const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r 
   folderName: t,
   command: n(e, r)
 }), z = {
+  showMessage: (e) => [c(e.header, 0, "faces")],
   changeActorImages: (e) => [
     c(e, 1, "characters"),
     c(e, 3, "faces"),
@@ -445,16 +447,16 @@ const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r 
   changeParallax: (e) => [c(e, 0, "parallaxes")],
   changeVehicleImage: (e) => [c(e, 1, "characters")],
   other: () => []
-}, Ve = (e, r, t) => Se(
+}, _e = (e, r, t) => Se(
   e.list.filter(L)
-).flatMap((s) => Re(s, r, t)), _e = (e, r, t) => ({
+).flatMap((s) => Re(s, r, t)), Ve = (e, r, t) => ({
   folderName: e.folderName,
   command: e.command,
   eventId: r.id,
   pageIndex: t,
   eventName: r.name
-}), Re = (e, r, t) => e.map((a) => _e(a, t, r)), Er = (e) => ({
-  commands: P(e, Ve),
+}), Re = (e, r, t) => e.map((a) => Ve(a, t, r)), Er = (e) => ({
+  commands: P(e, _e),
   background1: {
     folderName: "battlebacks1",
     fileName: e.battleback1Name
@@ -521,7 +523,7 @@ const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r 
 }, pr = (e) => S(e, (r, t, a) => ({
   page: v(r, t, a),
   conditions: J(r.conditions)
-})).flat(2), fr = (e) => _(e, v), xr = (e) => V(e, v), je = (e) => e.reduce((r, t) => {
+})).flat(2), fr = (e) => V(e, v), xr = (e) => _(e, v), je = (e) => e.reduce((r, t) => {
   if (t.code === 117) {
     const a = t.parameters[0];
     r[a] = (r[a] || 0) + 1;
@@ -550,7 +552,7 @@ export {
   Be as audioCommandInfo,
   W as audioPathFromCommands,
   C as collectAudioCommands,
-  Ve as collectImageCommands,
+  _e as collectImageCommands,
   v as collectVariableReadCommand,
   Me as commandChoice,
   dr as correctMapEventText,
