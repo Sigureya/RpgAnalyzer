@@ -33,7 +33,7 @@ export const extractVariableWritsFromEventCommand = (
   return [
     {
       variableId: command.parameters[0],
-      code: command.code,
+      eventCode: command.code,
     },
   ];
 };
@@ -51,8 +51,11 @@ export const extractVariableWritsFromControlVariable = (
 ): VariableWrite[] => {
   const start = command.parameters[0];
   const end = command.parameters[1];
-  return Array.from({ length: end - start + 1 }, (_, i) => ({
-    variableId: i + start,
-    code: RpgTypes.CONTROL_VARIABLES,
-  }));
+  return Array.from<unknown, VariableWrite>(
+    { length: end - start + 1 },
+    (_, i) => ({
+      variableId: i + start,
+      eventCode: RpgTypes.CONTROL_VARIABLES,
+    })
+  );
 };
