@@ -431,7 +431,10 @@ const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r 
   E(e, "airship")
 ], Se = (e) => b(e, z), Pe = (e) => le(e.filter(L), z), c = (e, r, t) => ({
   folderName: t,
-  command: n(e, r)
+  parameter: n(
+    e,
+    r
+  )
 }), z = {
   showMessage: (e) => [c(e.header, 0, "faces")],
   changeActorImages: (e) => [
@@ -451,7 +454,7 @@ const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r 
   e.list.filter(L)
 ).flatMap((s) => Re(s, r, t)), Ve = (e, r, t) => ({
   folderName: e.folderName,
-  command: e.command,
+  command: e.parameter,
   eventId: r.id,
   pageIndex: t,
   eventName: r.name
