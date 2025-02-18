@@ -14,7 +14,6 @@ const testData = [
   { folder: "images", fileName: "npc.png" },
 ];
 
-// generatePathSet のテスト
 test("generatePathSet creates a valid Set", () => {
   const set = generatePathSet(resourceList, ":");
   expect(set.has("images:hero.png")).toBe(true);
@@ -23,10 +22,11 @@ test("generatePathSet creates a valid Set", () => {
   expect(set.has("images:npc.png")).toBe(false);
 });
 
-// countMatches のテスト
-test("countMatches counts the correct number of matches", () => {
-  const set = generatePathSet(resourceList, ":");
-  expect(
-    countMatches(testData, set, (item) => `${item.folder}:${item.fileName}`)
-  ).toBe(1);
+describe("countMatches", () => {
+  test("countMatches counts the correct number of matches", () => {
+    const set = generatePathSet(resourceList, ":");
+    expect(
+      countMatches(testData, set, (item) => `${item.folder}:${item.fileName}`)
+    ).toBe(1);
+  });
 });
