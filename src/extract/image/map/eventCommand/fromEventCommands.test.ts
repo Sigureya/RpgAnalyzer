@@ -1,27 +1,64 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { extractImagesFromCommandList } from "./fromEventCommands";
 import * as RpgTypes from "@sigureya/rpgtypes";
 import type { ImageCommand } from "./types";
+import type { PartialMappingObject } from "@sigureya/rpg-data-tools";
+import {
+  flatMappingCommandList,
+  isImageCommand,
+} from "@sigureya/rpg-data-tools";
 
 const expectFlat = (commands: RpgTypes.EventCommand[]) => {
   return extractImagesFromCommandList(commands);
 };
 
+describe("showMessage", () => {
+  const command: RpgTypes.Command_ShowMessage = {
+    code: RpgTypes.SHOW_MESSAGE,
+    indent: 0,
+    parameters: ["face01", 0, 0, 0, "speaker"],
+  };
+  const mockMapper: PartialMappingObject<number[]> = {
+    showMessage: vi.fn(() => [123]),
+    other: vi.fn(() => []),
+  };
+  test("showMessage is imageCommand", () => {
+    expect(isImageCommand(command)).toBe(true);
+  });
+  test("flatMapping toHaveBeen called", () => {
+    const result = flatMappingCommandList([command], mockMapper);
+    expect(result).toEqual([123]);
+    expect(mockMapper.other).not.toHaveBeenCalled();
+    expect(mockMapper.showMessage).toBeCalledTimes(1);
+  });
+});
+
 describe("extractImagesFromCommands", () => {
+  test("showMessage", () => {
+    const command: RpgTypes.Command_ShowMessage = {
+      code: RpgTypes.SHOW_MESSAGE,
+      indent: 0,
+      parameters: ["face01", 0, 0, 0, "speaker"],
+    };
+    const expected: ImageCommand = {
+      folderName: "faces",
+      command: { value: "face01", code: RpgTypes.SHOW_MESSAGE, paramIndex: 0 },
+    };
+    const result = expectFlat([command]);
+    expect(result).toEqual([expected]);
+  });
   test("showPicture", () => {
     const command: RpgTypes.Command_ShowPicture = {
       code: RpgTypes.SHOW_PICTURE,
       indent: 0,
       parameters: [1, "test", 0, 0, 100, 100, 100, 100, 0],
     };
-    const expected: [ImageCommand] = [
-      {
-        folderName: "pictures",
-        command: { value: "test", code: RpgTypes.SHOW_PICTURE, paramIndex: 1 },
-      },
-    ];
+    const expected: ImageCommand = {
+      folderName: "pictures",
+      command: { value: "test", code: RpgTypes.SHOW_PICTURE, paramIndex: 1 },
+    };
     const result = expectFlat([command]);
-    expect(result).toEqual(expected);
+    expect(result).toEqual([expected]);
   });
   test("changeActorImages", () => {
     const command: RpgTypes.Command_ChangeActorImages = {

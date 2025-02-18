@@ -1,10 +1,9 @@
-import { CommandParameter } from '@sigureya/rpg-data-tools';
-import { VariableReference, AudioCommandInfo, ImageCommand, ExtractedPageCondition, ImageResourcePath, ExtractedVariableWrite } from './extract';
+import { VariableReference, AudioCommandInfo, ImageCommand, ExtractedPageCondition, ImageResourcePath, ExtractedVariableWrite, TextCommandParameter } from './extract';
 export interface ExtractedCommandInfos {
     variableReading: VariableReference[];
     variableWriting: ExtractedVariableWrite[];
     calls: Record<number, number>;
-    texts: CommandParameter<string>[];
+    texts: TextCommandParameter[];
     audios: AudioCommandInfo[];
     images: ImageCommand[];
 }

@@ -1,8 +1,8 @@
-const p = "bgm", N = "se", d = "me", y = "bgs", Y = "characters", x = (e, r) => r ? e === r.code : !1, j = "MessageHeader invalid command", Q = "Invalid Head", T = (e) => typeof e[0] == "string" && e.length === 1, u = (e, r, t) => {
+const p = "bgm", N = "se", d = "me", y = "bgs", Y = "characters", f = (e, r) => r ? e === r.code : !1, j = "MessageHeader invalid command", Q = "Invalid Head", T = (e) => typeof e[0] == "string" && e.length === 1, u = (e, r, t) => {
   const a = [];
   for (let s = t; s < r.length; s++) {
     const m = r[s];
-    if (x(e, m) && T(m.parameters))
+    if (f(e, m) && T(m.parameters))
       a.push({
         code: e,
         indent: m.indent,
@@ -14,7 +14,7 @@ const p = "bgm", N = "se", d = "me", y = "bgs", Y = "characters", x = (e, r) => 
   return a;
 }, w = (e, r, t) => {
   const a = e[r];
-  if (a && x(t, a) && T(a.parameters))
+  if (a && f(t, a) && T(a.parameters))
     return {
       code: t,
       indent: a.indent,
@@ -37,7 +37,7 @@ const p = "bgm", N = "se", d = "me", y = "bgs", Y = "characters", x = (e, r) => 
   bodys: u(401, e, r + 1)
 }), $ = "ScrollTextHeader invalid command", ee = (e, r) => {
   const t = e[r];
-  if (x(105, t))
+  if (f(105, t))
     return t;
   const a = {
     headCode: 105,
@@ -65,7 +65,7 @@ class A {
     return this.getExpandedBodies();
   }
 }
-class f extends A {
+class x extends A {
   constructor(r, t, a) {
     super(t, a), this.bodyCode = r;
   }
@@ -104,7 +104,7 @@ class F extends A {
     return [this.mergedBody()];
   }
 }
-const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r = []) => new f(401, e, r), ce = (e, r = []) => new f(405, e, r), ne = (e, r = []) => oe(e) ? new f(
+const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r = []) => new x(401, e, r), ce = (e, r = []) => new x(405, e, r), ne = (e, r = []) => oe(e) ? new x(
   408,
   e,
   r
@@ -268,7 +268,7 @@ const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r 
   other: (e) => [e]
 }, Ee = (e) => b(e, ge), pe = (e) => !!e, I = (e, r) => e.pages.map(
   (t, a) => r(t, a, e)
-), S = (e, r) => e.events.filter(pe).map((t) => I(t, r)), P = (e, r) => S(e, r).flat(2), _ = (e, r) => e.map((t) => I(t, r)), V = (e, r) => e.map((t) => r(t, 0, t)), R = (e, r) => r.includes(e.code), k = (e) => R(e, xe), xe = [
+), S = (e, r) => e.events.filter(pe).map((t) => I(t, r)), P = (e, r) => S(e, r).flat(2), _ = (e, r) => e.map((t) => I(t, r)), V = (e, r) => e.map((t) => r(t, 0, t)), R = (e, r) => r.includes(e.code), k = (e) => R(e, fe), fe = [
   241,
   245,
   249,
@@ -277,7 +277,8 @@ const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r 
   133,
   139,
   140
-], L = (e) => R(e, fe), fe = [
+], L = (e) => R(e, xe), xe = [
+  101,
   231,
   322,
   323,
@@ -432,6 +433,7 @@ const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r 
   folderName: t,
   command: n(e, r)
 }), z = {
+  showMessage: (e) => [c(e.header, 0, "faces")],
   changeActorImages: (e) => [
     c(e, 1, "characters"),
     c(e, 3, "faces"),
@@ -521,7 +523,7 @@ const ae = "選択肢ヘルプ", oe = (e) => e.parameters[0] === ae, se = (e, r 
 }, pr = (e) => S(e, (r, t, a) => ({
   page: v(r, t, a),
   conditions: J(r.conditions)
-})).flat(2), xr = (e) => V(e, v), fr = (e) => _(e, v), je = (e) => e.reduce((r, t) => {
+})).flat(2), fr = (e) => V(e, v), xr = (e) => _(e, v), je = (e) => e.reduce((r, t) => {
   if (t.code === 117) {
     const a = t.parameters[0];
     r[a] = (r[a] || 0) + 1;
@@ -587,9 +589,9 @@ export {
   mr as extractTextFromTroop,
   sr as extractTextFromWeapon,
   Ae as extractTextMapper,
-  xr as extractVariableReadingFromCommonEvent,
+  fr as extractVariableReadingFromCommonEvent,
   pr as extractVariableReadingFromMap,
-  fr as extractVariableReadingFromTroop,
+  xr as extractVariableReadingFromTroop,
   H as extractVariableReadingInfos,
   De as extractVariableReference,
   ze as extractVariableWriting,
