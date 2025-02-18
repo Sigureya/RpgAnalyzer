@@ -42,7 +42,11 @@ describe("extractImagesFromCommands", () => {
     };
     const expected: ImageCommand = {
       folderName: "faces",
-      command: { value: "face01", code: RpgTypes.SHOW_MESSAGE, paramIndex: 0 },
+      parameter: {
+        value: "face01",
+        code: RpgTypes.SHOW_MESSAGE,
+        paramIndex: 0,
+      },
     };
     const result = expectFlat([command]);
     expect(result).toEqual([expected]);
@@ -55,7 +59,7 @@ describe("extractImagesFromCommands", () => {
     };
     const expected: ImageCommand = {
       folderName: "pictures",
-      command: { value: "test", code: RpgTypes.SHOW_PICTURE, paramIndex: 1 },
+      parameter: { value: "test", code: RpgTypes.SHOW_PICTURE, paramIndex: 1 },
     };
     const result = expectFlat([command]);
     expect(result).toEqual([expected]);
@@ -69,7 +73,7 @@ describe("extractImagesFromCommands", () => {
     const result = expectFlat([command]);
     const expectedChactor: ImageCommand = {
       folderName: "characters",
-      command: {
+      parameter: {
         value: "character",
         code: RpgTypes.CHANGE_ACTOR_IMAGES,
         paramIndex: 1,
@@ -77,7 +81,7 @@ describe("extractImagesFromCommands", () => {
     };
     const expectedFace: ImageCommand = {
       folderName: "faces",
-      command: {
+      parameter: {
         value: "face",
         code: RpgTypes.CHANGE_ACTOR_IMAGES,
         paramIndex: 3,
@@ -85,7 +89,7 @@ describe("extractImagesFromCommands", () => {
     };
     const expectedSv: ImageCommand = {
       folderName: "sv_actors",
-      command: {
+      parameter: {
         value: "sv_battler",
         code: RpgTypes.CHANGE_ACTOR_IMAGES,
         paramIndex: 5,
@@ -102,7 +106,7 @@ describe("extractImagesFromCommands", () => {
     const result = expectFlat([command]);
     const expected1: ImageCommand = {
       folderName: "battlebacks1",
-      command: {
+      parameter: {
         value: "test1",
         code: RpgTypes.CHANGE_BATTLE_BACKGROUND,
         paramIndex: 0,
@@ -110,7 +114,7 @@ describe("extractImagesFromCommands", () => {
     };
     const expected2: ImageCommand = {
       folderName: "battlebacks2",
-      command: {
+      parameter: {
         value: "test2",
         code: RpgTypes.CHANGE_BATTLE_BACKGROUND,
         paramIndex: 1,
@@ -127,7 +131,7 @@ describe("extractImagesFromCommands", () => {
     const result = expectFlat([command]);
     const expected: ImageCommand = {
       folderName: "parallaxes",
-      command: {
+      parameter: {
         value: "test",
         code: RpgTypes.CHANGE_PARALLAX,
         paramIndex: 0,
@@ -144,7 +148,7 @@ describe("extractImagesFromCommands", () => {
     const result = expectFlat([command]);
     const expected: ImageCommand = {
       folderName: "characters",
-      command: {
+      parameter: {
         value: "test",
         code: RpgTypes.CHANGE_VEHICLE_IMAGE,
         paramIndex: 1,
