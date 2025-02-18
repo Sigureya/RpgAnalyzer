@@ -18,7 +18,7 @@ export const countMatchesImage = (
   );
 
 export const countMatchesAudio = (
-  list: ReadonlyArray<AudioCommandInfo>,
+  list: ReadonlyArray<Pick<AudioCommandInfo, "path">>,
   set: ReadonlySet<string>
 ): number =>
   countMatches(
@@ -49,4 +49,4 @@ export const countMatchesVariableWrite = (
 export const countCommonEventCall = (
   eventCallCount: CommonEventCallCount,
   targetEventIds: number[]
-) => targetEventIds.reduce((acc, id) => acc + eventCallCount[id], 0);
+) => targetEventIds.reduce((acc, id) => acc + (eventCallCount[id] ?? 0), 0);

@@ -1,7 +1,7 @@
 import type { ImageFolders } from "@sigureya/rpgtypes";
 
-export interface ResourcePath {
-  folderName: string;
+export interface ResourcePath<Folder extends string = string> {
+  folderName: Folder;
   fileName: string;
 }
 
