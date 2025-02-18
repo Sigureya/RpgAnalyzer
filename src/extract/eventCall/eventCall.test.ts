@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest";
+import type { CommonEventCallCount } from "./eventCall";
 import { extractCommonEventCalls } from "./eventCall";
 import * as RmmzMock from "@sigureya/rmmzmock";
 import type { Command_CommonEvent } from "@sigureya/rpgtypes";
@@ -19,8 +20,9 @@ describe("extractCommonEventCalls", () => {
       createCommand(259),
       createCommand(235),
     ];
-    const result = extractCommonEventCalls(list);
-    expect(result).toEqual({ 235: 3, 353: 2, 259: 1 });
+    const expected: CommonEventCallCount = { 235: 3, 353: 2, 259: 1 };
+    const result: CommonEventCallCount = extractCommonEventCalls(list);
+    expect(result).toEqual(expected);
   });
 
   test("ignores non-common event commands", () => {
@@ -34,7 +36,7 @@ describe("extractCommonEventCalls", () => {
       createCommand(259),
       createCommand(235),
     ];
-    const result = extractCommonEventCalls(list);
+    const result: CommonEventCallCount = extractCommonEventCalls(list);
     expect(result).toEqual({ 235: 3, 353: 2, 259: 1 });
   });
 

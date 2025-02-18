@@ -1,7 +1,7 @@
 import type { Command_ControlVariables } from "@sigureya/rpgtypes";
 import type { CommandTypes } from "./detail/types";
 
-export interface ExtractedVariableWrite {
+export interface VariableWrite {
   code: number;
   variableId: number;
 }

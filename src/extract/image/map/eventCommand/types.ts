@@ -3,7 +3,7 @@ import type { ImageFolders } from "@sigureya/rpgtypes";
 
 export interface ImageCommand {
   folderName: ImageFolders;
-  command: CommandParameter<string>;
+  parameter: CommandParameter<string>;
 }
 
 export interface ImageCommandInfo {

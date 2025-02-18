@@ -8,9 +8,9 @@ import * as RpgMock from "@sigureya/rmmzmock";
 import type { EventCommand } from "@sigureya/rpgtypes";
 
 import type * as VDTypes from "./types";
-import type { VariableReference } from "./types";
+import type { VariableRead } from "./types";
 
-type ExpectedReference = Omit<VariableReference, "index">;
+type ExpectedReference = Omit<VariableRead, "index">;
 
 const testVariableDesignationCommand = (
   testName: string,
@@ -21,7 +21,7 @@ const testVariableDesignationCommand = (
     test("should identify command as a variable designation", () => {
       expect(isVariableReadCommand(command)).toBe(true);
     });
-    const reuslt: VariableReference[] = extractVariableReference(command);
+    const reuslt: VariableRead[] = extractVariableReference(command);
     test("should extract correct variable reference", () => {
       expect(reuslt).not.toEqual([]);
       expect(reuslt).toMatchObject(expected);

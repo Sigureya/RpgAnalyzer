@@ -1,9 +1,11 @@
 import type { EventCommand } from "@sigureya/rpgtypes";
 import { COMMON_EVENT } from "@sigureya/rpgtypes";
 
+export type CommonEventCallCount = Record<number, number>;
+
 export const extractCommonEventCalls = (
   list: ReadonlyArray<EventCommand>
-): Record<number, number> => {
+): CommonEventCallCount => {
   return list.reduce<Record<number, number>>((acc, command) => {
     if (command.code === COMMON_EVENT) {
       const id: number = command.parameters[0];

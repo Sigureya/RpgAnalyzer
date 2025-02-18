@@ -20,7 +20,7 @@ const imageCommandInfo = (
   pageIndex: number
 ): ImageCommandInfo => ({
   folderName: command.folderName,
-  command: command.command,
+  command: command.parameter,
   eventId: event.id,
   pageIndex: pageIndex,
   eventName: event.name,
