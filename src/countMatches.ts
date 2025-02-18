@@ -19,7 +19,7 @@ export const generatePathSet = <Path extends ResourcePath>(
 
 export const countMatches = <T, Key extends string | number>(
   list: ReadonlyArray<T>,
-  set: ReadonlySet<Key>,
+  set: ReadonlySetLike<Key>,
   keyFunc: (item: T) => Key
 ): number => {
   return list.reduce((acc, item) => {
