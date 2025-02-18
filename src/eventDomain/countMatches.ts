@@ -5,13 +5,15 @@ const createKey = <F extends string>(
   filePath: string,
   separator: string = ":"
 ) => {
-  // 書式を固定するためにas constを付けてる。戻り値に書くと二度手間になる。
-  return `${folderName}${separator}${filePath}` as const;
+  return `${folderName}${separator}${filePath}`;
 };
-export const generatePathSet = <Path extends ResourcePath>(
+export const generatePathSet = <
+  Folder extends string,
+  Path extends ResourcePath<Folder>
+>(
   list: ReadonlyArray<Path>,
   separator: string = ":"
-) => {
+): Set<string> => {
   return new Set(
     list.map((path) => createKey(path.folderName, path.fileName, separator))
   );
