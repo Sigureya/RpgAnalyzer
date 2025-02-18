@@ -1,2 +1,1 @@
-export * from "./extract";
-export * from "./mapEvent";
+export * from "./eventDomain";
