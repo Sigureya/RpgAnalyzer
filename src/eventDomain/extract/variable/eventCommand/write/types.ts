@@ -1,10 +1,10 @@
-import type { Command_ControlVariables } from "@sigureya/rpgtypes";
+import type * as RpgTypes from "@sigureya/rpgtypes";
 import type { CommandTypes } from "./detail/types";
 
 export interface VariableWrite {
-  code: number;
+  eventCode: number;
   variableId: number;
 }
 export type Command_VariableWrite =
   | CommandTypes[keyof CommandTypes]
-  | Command_ControlVariables;
+  | RpgTypes.Command_ControlVariables;
