@@ -1,9 +1,9 @@
+import type { MappingObject2 } from "@sigureya/rpg-data-tools";
 import {
   flatMappingCommandList,
   isImageCommand,
   mappingCommandList,
   pickCommandParamString,
-  type MappingObject,
 } from "@sigureya/rpg-data-tools";
 import type { ImageCommand } from "./types";
 import type {
@@ -50,15 +50,19 @@ const imageCommand = <
   };
 };
 const mappingTable: Pick<
-  MappingObject<ImageCommand[]>,
+  MappingObject2<ImageCommand[]>,
   | "changeActorImages"
   //  | "setMovementRoute"
   | "showPicture"
   | "changeBattleBackground"
   | "changeParallax"
   | "changeVehicleImage"
+  | "showMessage"
   | "other"
 > = {
+  showMessage: (command) => {
+    return [imageCommand(command.header, 0, "faces")];
+  },
   changeActorImages: (command) => {
     return [
       imageCommand(command, 1, "characters"),
