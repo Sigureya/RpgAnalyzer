@@ -91,7 +91,7 @@ describe("extractEventCommandData", () => {
   describe("should extract images", () => {
     test("picture", () => {
       const expectedPicture: $.ImageCommand = {
-        command: {
+        parameter: {
           code: RpgTypes.SHOW_PICTURE,
           paramIndex: 1,
           value: "picture3",
@@ -102,7 +102,7 @@ describe("extractEventCommandData", () => {
     });
     test("showMessage", () => {
       const expected: $.ImageCommand = {
-        command: {
+        parameter: {
           code: RpgTypes.SHOW_MESSAGE,
           paramIndex: 0,
           value: "face",
@@ -113,7 +113,7 @@ describe("extractEventCommandData", () => {
     });
     test("parallax", () => {
       const expected: $.ImageCommand = {
-        command: {
+        parameter: {
           code: RpgTypes.CHANGE_PARALLAX,
           paramIndex: 0,
           value: "parallaxImage",
@@ -124,7 +124,7 @@ describe("extractEventCommandData", () => {
     });
     test("changeActorImages character", () => {
       const character: $.ImageCommand = {
-        command: {
+        parameter: {
           code: RpgTypes.CHANGE_ACTOR_IMAGES,
           paramIndex: 1,
           value: "actorCharacter",
@@ -135,7 +135,7 @@ describe("extractEventCommandData", () => {
     });
     test("changeActorImages face", () => {
       const face: $.ImageCommand = {
-        command: {
+        parameter: {
           code: RpgTypes.CHANGE_ACTOR_IMAGES,
           paramIndex: 3,
           value: "actorFace",
@@ -146,7 +146,7 @@ describe("extractEventCommandData", () => {
     });
     test("changeActorImages sv", () => {
       const sv: $.ImageCommand = {
-        command: {
+        parameter: {
           code: RpgTypes.CHANGE_ACTOR_IMAGES,
           paramIndex: 5,
           value: "svBattler",

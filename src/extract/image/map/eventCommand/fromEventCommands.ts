@@ -1,4 +1,7 @@
-import type { MappingObject2 } from "@sigureya/rpg-data-tools";
+import type {
+  CommandParameter,
+  MappingObject2,
+} from "@sigureya/rpg-data-tools";
 import {
   flatMappingCommandList,
   isImageCommand,
@@ -43,10 +46,13 @@ const imageCommand = <
   },
   index: Index,
   folderName: ImageFolders
-) => {
+): ImageCommand => {
   return {
     folderName,
-    command: pickCommandParamString(command, index),
+    parameter: pickCommandParamString(
+      command,
+      index
+    ) as CommandParameter<string>,
   };
 };
 const mappingTable: Pick<
