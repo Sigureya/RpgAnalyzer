@@ -5,7 +5,7 @@ import type {
   MapEventContainer,
   MapEventPage,
 } from "@sigureya/rpgtypes";
-import type { VariableReference } from "./eventCommand";
+import type { VariableRead } from "./eventCommand";
 import { extractVariableReadingInfos } from "./eventCommand";
 import type { ExtractedVariableCommands } from "./types";
 import {
@@ -22,7 +22,7 @@ export const collectVariableReadCommand = <
   pageIndex: number,
   event: { id: number }
 ): ExtractedVariableCommands => {
-  const list: VariableReference[] = extractVariableReadingInfos(page.list);
+  const list: VariableRead[] = extractVariableReadingInfos(page.list);
   return {
     pageIndex,
     eventId: event.id,

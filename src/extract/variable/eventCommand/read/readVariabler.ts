@@ -1,4 +1,4 @@
-import type { VariableDesignationCommand, VariableReference } from "./types";
+import type { VariableDesignationCommand, VariableRead } from "./types";
 import type { EventCommand } from "@sigureya/rpgtypes";
 
 import {
@@ -9,7 +9,7 @@ import {
 
 export const extractVariableReadingInfos = (
   commandList: ReadonlyArray<EventCommand>
-): VariableReference[] => {
+): VariableRead[] => {
   return commandList
     .filter(isVariableReadCommand)
     .flatMap(extractVariableReference);
@@ -17,12 +17,12 @@ export const extractVariableReadingInfos = (
 
 export const extractVariableReference = (
   command: VariableDesignationCommand
-): VariableReference[] => {
+): VariableRead[] => {
   const indexList = VARIABLEID_INDEX_TABLE[command.code];
   if (indexList === undefined) {
     throw new Error(`code${command.code} is not supported`);
   }
-  return indexList.map<VariableReference>((index) => ({
+  return indexList.map<VariableRead>((index) => ({
     eventCode: command.code,
     index: index,
     variableId: command.parameters[index] as number,

@@ -1,9 +1,9 @@
 import * as RpgTypes from "@sigureya/rpgtypes";
-import type { Command_VariableWrite, ExtractedVariableWrite } from "./types";
+import type { Command_VariableWrite, VariableWrite } from "./types";
 
 export const extractVariableWriting = (
   list: ReadonlyArray<RpgTypes.EventCommand>
-): ExtractedVariableWrite[] => {
+): VariableWrite[] => {
   return list.flatMap((command) => {
     if (isVariableWriteCommand(command)) {
       return extractVariableWritsFromEventCommand(command);
@@ -25,7 +25,7 @@ export const isVariableWriteCommand = (
 
 export const extractVariableWritsFromEventCommand = (
   command: Command_VariableWrite
-): ExtractedVariableWrite[] => {
+): VariableWrite[] => {
   if (command.code === RpgTypes.CONTROL_VARIABLES) {
     return extractVariableWritsFromControlVariable(command);
   }
@@ -48,7 +48,7 @@ interface Command_ControlVariableLike {
 
 export const extractVariableWritsFromControlVariable = (
   command: Command_ControlVariableLike
-): ExtractedVariableWrite[] => {
+): VariableWrite[] => {
   const start = command.parameters[0];
   const end = command.parameters[1];
   return Array.from({ length: end - start + 1 }, (_, i) => ({

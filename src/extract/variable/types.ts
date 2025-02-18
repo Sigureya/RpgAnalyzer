@@ -1,7 +1,7 @@
-import type { VariableReference } from "./eventCommand";
+import type { VariableRead } from "./eventCommand";
 
 export interface ExtractedVariableCommands {
   pageIndex: number;
   eventId: number;
-  commands: VariableReference[];
+  commands: VariableRead[];
 }
