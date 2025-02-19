@@ -16,5 +16,3 @@ export interface ImageResourcePath {
   folder: ImageFolders;
   fileName: string;
 }
-
-const xxxx = () => {};
