@@ -70,7 +70,7 @@ describe("countAssets", () => {
     });
   });
 
-  describe("countMatchesVariable", () => {
+  describe("countMatchesVariableRead", () => {
     const variables = new Set([1]);
     test("returns 0 when list is empty", () => {
       expect(countMatchesVariable([], variables)).toBe(0);
@@ -78,6 +78,27 @@ describe("countAssets", () => {
     test("returns 0 when set is empty", () => {
       const list: VariableRead[] = [{ variableId: 1, eventCode: 0, index: 0 }];
       expect(countMatchesVariable(list, new Set())).toBe(0);
+    });
+    test("returns 0 when list is empty", () => {
+      expect(countMatchesVariable([], variables)).toBe(0);
+    });
+  });
+  describe("countMatchesVariableWrite", () => {
+    const variables = new Set([7]);
+    const list: VariableWrite[] = [
+      {
+        variableId: 7,
+        eventCode: 0,
+      },
+    ];
+    test("", () => {
+      expect(countMatchesVariableWrite(list, variables)).toBe(1);
+    });
+    test("returns 0 when list is empty", () => {
+      expect(countMatchesVariableWrite([], variables)).toBe(0);
+    });
+    test("returns 0 when set is empty", () => {
+      expect(countMatchesVariableWrite(list, new Set())).toBe(0);
     });
   });
 
